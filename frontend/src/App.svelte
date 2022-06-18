@@ -30,6 +30,14 @@
 							   </div>
 
 		 				</div>
+						 <div aling="center">
+							<h5> PetLovers was born in 2020, in the city of Antofagasta. We opened our store with the desire and illusion of becoming a relevant actor in the lives of pets and their owners.
+								Our team, our way of working and our actions are distinguished by the following attributes:</h5>
+							<h6> We are committed.</h6>
+							<h6>We like to make things easy and simple for you.</h6>
+							<h6>We are close.</h6>
+							<h6>We aim to deliver a service of excellence.</h6>
+						</div>
 	 				</div>
 					 
 				</div>

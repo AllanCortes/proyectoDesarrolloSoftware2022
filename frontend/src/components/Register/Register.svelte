@@ -31,13 +31,13 @@
 <div>
   <br /><br /><br />
   <div class="form-signin">
-    <h1 class="text-center text-login">Registrarse</h1>
+    <h1 class="text-center text-login">Register</h1>
      <div class="center">
       <input
         name="Name"
         type="Name"
         class="input-form"
-        placeholder="Nombre"
+        placeholder="Fist name"
         on:input={(e) => changeUser(e)}
       />
     </div>
@@ -56,7 +56,7 @@
         name="email"
         type="email"
         class="input-form"
-        placeholder="Correo"
+        placeholder="Email"
         on:input={(e) => changeUser(e)}
       />
     </div>
@@ -65,7 +65,7 @@
         name="password"
         type="password"
         class="input-form"
-        placeholder="Contraseña"
+        placeholder="Password"
         on:input={(e) => changeUser(e)}
       />
     </div>
@@ -74,7 +74,7 @@
         name="number"
         type="number"
         class="input-form"
-        placeholder="Numero de telefono"
+        placeholder="Phone"
         on:input={(e) => changeUser(e)}
       />
     </div>
@@ -83,16 +83,16 @@
         name="adress"
         type="adress"
         class="input-form"
-        placeholder="Dirrecion"
+        placeholder="ShippingInfo"
         on:input={(e) => changeUser(e)}
       />
     </div>
     <br />
     <div class="center">
-      <button class="button-signup fondo-color-signup" on:click={loginUser}> Registrarse </button>
+      <button class="button-signup fondo-color-signup" on:click={loginUser}> Register </button>
     </div>
     <p class="text-center">
-      ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
+      ¿you already have an account? <Link to="/login">Login</Link>
     </p>
   </div>
 </div>
@@ -149,6 +149,6 @@
     transition: 0.2s;
   }
   .fondo-color-signup {
-    background: #833ac7;
+    background: #FF0000;
   }
 </style>

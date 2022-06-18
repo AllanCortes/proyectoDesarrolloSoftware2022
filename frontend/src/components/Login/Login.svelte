@@ -31,13 +31,13 @@
   <div>
     <br /><br /><br />
     <div class="form-signin">
-      <h1 class="text-center text-login">Iniciar Sesion</h1>
+      <h1 class="text-center text-login">Login</h1>
       <div class="center">
         <input
           name="email"
           type="email"
           class="input-form"
-          placeholder="Correo"
+          placeholder="Email"
           required
           on:input={(e) => changeUser(e)}
         />
@@ -47,16 +47,16 @@
           name="password"
           type="password"
           class="input-form"
-          placeholder="Contraseña"
+          placeholder="Password"
           on:input={(e) => changeUser(e)}
         />
       </div>
       <br />
       <div class="center">
-        <button class="button-signup fondo-color-signup" > Registrarse </button>
+        <button class="button-signup fondo-color-signup" > Login </button>
       </div>
       <p class="text-center">
-        ¿No tienes cuenta? <Link to="/register">Registrarse</Link>
+        ¿You do not have an account? <Link to="/register">Register</Link>
       </p>
     </div>
   </div>

@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -11365,13 +11365,13 @@ var app = (function () {
     const { console: console_1$1 } = globals;
     const file$5 = "src/components/Login/Login.svelte";
 
-    // (59:27) <Link to="/register">
+    // (59:37) <Link to="/register">
     function create_default_slot$3(ctx) {
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text("Registrarse");
+    			t = text("Register");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
@@ -11385,7 +11385,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$3.name,
     		type: "slot",
-    		source: "(59:27) <Link to=\\\"/register\\\">",
+    		source: "(59:37) <Link to=\\\"/register\\\">",
     		ctx
     	});
 
@@ -11437,7 +11437,7 @@ var app = (function () {
     			t0 = space();
     			div3 = element("div");
     			h1 = element("h1");
-    			h1.textContent = "Iniciar Sesion";
+    			h1.textContent = "Login";
     			t2 = space();
     			div0 = element("div");
     			input0 = element("input");
@@ -11449,10 +11449,10 @@ var app = (function () {
     			t5 = space();
     			div2 = element("div");
     			button = element("button");
-    			button.textContent = "Registrarse";
+    			button.textContent = "Login";
     			t7 = space();
     			p = element("p");
-    			t8 = text("¿No tienes cuenta? ");
+    			t8 = text("¿You do not have an account? ");
     			create_component(link.$$.fragment);
     			add_location(br0, file$5, 31, 4, 785);
     			add_location(br1, file$5, 31, 10, 791);
@@ -11462,25 +11462,25 @@ var app = (function () {
     			attr_dev(input0, "name", "email");
     			attr_dev(input0, "type", "email");
     			attr_dev(input0, "class", "input-form svelte-bto1o5");
-    			attr_dev(input0, "placeholder", "Correo");
+    			attr_dev(input0, "placeholder", "Email");
     			input0.required = true;
-    			add_location(input0, file$5, 35, 8, 934);
+    			add_location(input0, file$5, 35, 8, 925);
     			attr_dev(div0, "class", "center svelte-bto1o5");
-    			add_location(div0, file$5, 34, 6, 904);
+    			add_location(div0, file$5, 34, 6, 895);
     			attr_dev(input1, "name", "password");
     			attr_dev(input1, "type", "password");
     			attr_dev(input1, "class", "input-form svelte-bto1o5");
-    			attr_dev(input1, "placeholder", "Contraseña");
-    			add_location(input1, file$5, 45, 8, 1177);
+    			attr_dev(input1, "placeholder", "Password");
+    			add_location(input1, file$5, 45, 8, 1167);
     			attr_dev(div1, "class", "center svelte-bto1o5");
-    			add_location(div1, file$5, 44, 6, 1147);
-    			add_location(br3, file$5, 53, 6, 1380);
+    			add_location(div1, file$5, 44, 6, 1137);
+    			add_location(br3, file$5, 53, 6, 1368);
     			attr_dev(button, "class", "button-signup fondo-color-signup svelte-bto1o5");
-    			add_location(button, file$5, 55, 8, 1424);
+    			add_location(button, file$5, 55, 8, 1412);
     			attr_dev(div2, "class", "center svelte-bto1o5");
-    			add_location(div2, file$5, 54, 6, 1394);
+    			add_location(div2, file$5, 54, 6, 1382);
     			attr_dev(p, "class", "text-center svelte-bto1o5");
-    			add_location(p, file$5, 57, 6, 1518);
+    			add_location(p, file$5, 57, 6, 1500);
     			attr_dev(div3, "class", "form-signin svelte-bto1o5");
     			add_location(div3, file$5, 32, 4, 809);
     			add_location(div4, file$5, 30, 2, 774);
@@ -11631,13 +11631,13 @@ var app = (function () {
     const { console: console_1 } = globals;
     const file$4 = "src/components/Register/Register.svelte";
 
-    // (95:25) <Link to="/login">
+    // (95:36) <Link to="/login">
     function create_default_slot$2(ctx) {
     	let t;
 
     	const block = {
     		c: function create() {
-    			t = text("Inicia sesión");
+    			t = text("Login");
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, t, anchor);
@@ -11651,7 +11651,7 @@ var app = (function () {
     		block,
     		id: create_default_slot$2.name,
     		type: "slot",
-    		source: "(95:25) <Link to=\\\"/login\\\">",
+    		source: "(95:36) <Link to=\\\"/login\\\">",
     		ctx
     	});
 
@@ -11715,7 +11715,7 @@ var app = (function () {
     			t0 = space();
     			div7 = element("div");
     			h1 = element("h1");
-    			h1.textContent = "Registrarse";
+    			h1.textContent = "Register";
     			t2 = space();
     			div0 = element("div");
     			input0 = element("input");
@@ -11739,67 +11739,67 @@ var app = (function () {
     			t9 = space();
     			div6 = element("div");
     			button = element("button");
-    			button.textContent = "Registrarse";
+    			button.textContent = "Register";
     			t11 = space();
     			p = element("p");
-    			t12 = text("¿Ya tienes cuenta? ");
+    			t12 = text("¿you already have an account? ");
     			create_component(link.$$.fragment);
     			add_location(br0, file$4, 31, 2, 723);
     			add_location(br1, file$4, 31, 8, 729);
     			add_location(br2, file$4, 31, 14, 735);
-    			attr_dev(h1, "class", "text-center text-login svelte-1wqteha");
+    			attr_dev(h1, "class", "text-center text-login svelte-1sk7tyb");
     			add_location(h1, file$4, 33, 4, 776);
     			attr_dev(input0, "name", "Name");
     			attr_dev(input0, "type", "Name");
-    			attr_dev(input0, "class", "input-form svelte-1wqteha");
-    			attr_dev(input0, "placeholder", "Nombre");
-    			add_location(input0, file$4, 35, 6, 862);
-    			attr_dev(div0, "class", "center svelte-1wqteha");
-    			add_location(div0, file$4, 34, 5, 834);
+    			attr_dev(input0, "class", "input-form svelte-1sk7tyb");
+    			attr_dev(input0, "placeholder", "Fist name");
+    			add_location(input0, file$4, 35, 6, 859);
+    			attr_dev(div0, "class", "center svelte-1sk7tyb");
+    			add_location(div0, file$4, 34, 5, 831);
     			attr_dev(input1, "name", "Rut");
     			attr_dev(input1, "type", "Rut");
-    			attr_dev(input1, "class", "input-form svelte-1wqteha");
+    			attr_dev(input1, "class", "input-form svelte-1sk7tyb");
     			attr_dev(input1, "placeholder", "Rut");
     			input1.required = true;
     			add_location(input1, file$4, 44, 6, 1065);
-    			attr_dev(div1, "class", "center svelte-1wqteha");
+    			attr_dev(div1, "class", "center svelte-1sk7tyb");
     			add_location(div1, file$4, 43, 4, 1037);
     			attr_dev(input2, "name", "email");
     			attr_dev(input2, "type", "email");
-    			attr_dev(input2, "class", "input-form svelte-1wqteha");
-    			attr_dev(input2, "placeholder", "Correo");
+    			attr_dev(input2, "class", "input-form svelte-1sk7tyb");
+    			attr_dev(input2, "placeholder", "Email");
     			add_location(input2, file$4, 54, 6, 1281);
-    			attr_dev(div2, "class", "center svelte-1wqteha");
+    			attr_dev(div2, "class", "center svelte-1sk7tyb");
     			add_location(div2, file$4, 53, 4, 1253);
     			attr_dev(input3, "name", "password");
     			attr_dev(input3, "type", "password");
-    			attr_dev(input3, "class", "input-form svelte-1wqteha");
-    			attr_dev(input3, "placeholder", "Contraseña");
-    			add_location(input3, file$4, 63, 6, 1486);
-    			attr_dev(div3, "class", "center svelte-1wqteha");
-    			add_location(div3, file$4, 62, 4, 1458);
+    			attr_dev(input3, "class", "input-form svelte-1sk7tyb");
+    			attr_dev(input3, "placeholder", "Password");
+    			add_location(input3, file$4, 63, 6, 1485);
+    			attr_dev(div3, "class", "center svelte-1sk7tyb");
+    			add_location(div3, file$4, 62, 4, 1457);
     			attr_dev(input4, "name", "number");
     			attr_dev(input4, "type", "number");
-    			attr_dev(input4, "class", "input-form svelte-1wqteha");
-    			attr_dev(input4, "placeholder", "Numero de telefono");
-    			add_location(input4, file$4, 72, 6, 1701);
-    			attr_dev(div4, "class", "center svelte-1wqteha");
-    			add_location(div4, file$4, 71, 4, 1673);
+    			attr_dev(input4, "class", "input-form svelte-1sk7tyb");
+    			attr_dev(input4, "placeholder", "Phone");
+    			add_location(input4, file$4, 72, 6, 1698);
+    			attr_dev(div4, "class", "center svelte-1sk7tyb");
+    			add_location(div4, file$4, 71, 4, 1670);
     			attr_dev(input5, "name", "adress");
     			attr_dev(input5, "type", "adress");
-    			attr_dev(input5, "class", "input-form svelte-1wqteha");
-    			attr_dev(input5, "placeholder", "Dirrecion");
-    			add_location(input5, file$4, 81, 6, 1920);
-    			attr_dev(div5, "class", "center svelte-1wqteha");
-    			add_location(div5, file$4, 80, 4, 1892);
-    			add_location(br3, file$4, 89, 4, 2102);
-    			attr_dev(button, "class", "button-signup fondo-color-signup svelte-1wqteha");
-    			add_location(button, file$4, 91, 6, 2142);
-    			attr_dev(div6, "class", "center svelte-1wqteha");
-    			add_location(div6, file$4, 90, 4, 2114);
-    			attr_dev(p, "class", "text-center svelte-1wqteha");
-    			add_location(p, file$4, 93, 4, 2252);
-    			attr_dev(div7, "class", "form-signin svelte-1wqteha");
+    			attr_dev(input5, "class", "input-form svelte-1sk7tyb");
+    			attr_dev(input5, "placeholder", "ShippingInfo");
+    			add_location(input5, file$4, 81, 6, 1904);
+    			attr_dev(div5, "class", "center svelte-1sk7tyb");
+    			add_location(div5, file$4, 80, 4, 1876);
+    			add_location(br3, file$4, 89, 4, 2089);
+    			attr_dev(button, "class", "button-signup fondo-color-signup svelte-1sk7tyb");
+    			add_location(button, file$4, 91, 6, 2129);
+    			attr_dev(div6, "class", "center svelte-1sk7tyb");
+    			add_location(div6, file$4, 90, 4, 2101);
+    			attr_dev(p, "class", "text-center svelte-1sk7tyb");
+    			add_location(p, file$4, 93, 4, 2236);
+    			attr_dev(div7, "class", "form-signin svelte-1sk7tyb");
     			add_location(div7, file$4, 32, 2, 745);
     			add_location(div8, file$4, 30, 0, 714);
     		},
@@ -13245,8 +13245,8 @@ var app = (function () {
 
     // (18:4) <Route path="/">
     function create_default_slot_1(ctx) {
+    	let div5;
     	let div4;
-    	let div3;
     	let div2;
     	let div0;
     	let t0;
@@ -13259,12 +13259,23 @@ var app = (function () {
     	let t3;
     	let h11;
     	let t5;
-    	let div5;
+    	let div3;
+    	let h5;
+    	let t7;
+    	let h60;
+    	let t9;
+    	let h61;
+    	let t11;
+    	let h62;
+    	let t13;
+    	let h63;
+    	let t15;
+    	let div6;
 
     	const block = {
     		c: function create() {
+    			div5 = element("div");
     			div4 = element("div");
-    			div3 = element("div");
     			div2 = element("div");
     			div0 = element("div");
     			t0 = space();
@@ -13277,7 +13288,23 @@ var app = (function () {
     			h11 = element("h1");
     			h11.textContent = "La plataforma online de la mejor tienda de mascotas";
     			t5 = space();
-    			div5 = element("div");
+    			div3 = element("div");
+    			h5 = element("h5");
+    			h5.textContent = "PetLovers was born in 2020, in the city of Antofagasta. We opened our store with the desire and illusion of becoming a relevant actor in the lives of pets and their owners.\r\n\t\t\t\t\t\t\t\tOur team, our way of working and our actions are distinguished by the following attributes:";
+    			t7 = space();
+    			h60 = element("h6");
+    			h60.textContent = "We are committed.";
+    			t9 = space();
+    			h61 = element("h6");
+    			h61.textContent = "We like to make things easy and simple for you.";
+    			t11 = space();
+    			h62 = element("h6");
+    			h62.textContent = "We are close.";
+    			t13 = space();
+    			h63 = element("h6");
+    			h63.textContent = "We aim to deliver a service of excellence.";
+    			t15 = space();
+    			div6 = element("div");
     			attr_dev(div0, "class", "col-md-4");
     			add_location(div0, file, 23, 7, 517);
     			if (!src_url_equal(img.src, img_src_value = "https://i.ibb.co/5kQbrtc/Pet-Lovers.png")) attr_dev(img, "src", img_src_value);
@@ -13289,14 +13316,21 @@ var app = (function () {
     			add_location(div1, file, 25, 10, 570);
     			attr_dev(div2, "class", "row");
     			add_location(div2, file, 22, 6, 490);
-    			add_location(div3, file, 21, 5, 477);
-    			add_location(div4, file, 19, 4, 457);
-    			add_location(div5, file, 36, 3, 849);
+    			add_location(h5, file, 33, 7, 843);
+    			add_location(h60, file, 35, 7, 1135);
+    			add_location(h61, file, 36, 7, 1171);
+    			add_location(h62, file, 37, 7, 1236);
+    			add_location(h63, file, 38, 7, 1267);
+    			attr_dev(div3, "aling", "center");
+    			add_location(div3, file, 32, 7, 814);
+    			add_location(div4, file, 21, 5, 477);
+    			add_location(div5, file, 19, 4, 457);
+    			add_location(div6, file, 44, 3, 1376);
     		},
     		m: function mount(target, anchor) {
-    			insert_dev(target, div4, anchor);
-    			append_dev(div4, div3);
-    			append_dev(div3, div2);
+    			insert_dev(target, div5, anchor);
+    			append_dev(div5, div4);
+    			append_dev(div4, div2);
     			append_dev(div2, div0);
     			append_dev(div2, t0);
     			append_dev(div2, div1);
@@ -13306,16 +13340,27 @@ var app = (function () {
     			append_dev(h10, t2);
     			append_dev(div1, t3);
     			append_dev(div1, h11);
-    			insert_dev(target, t5, anchor);
-    			insert_dev(target, div5, anchor);
+    			append_dev(div4, t5);
+    			append_dev(div4, div3);
+    			append_dev(div3, h5);
+    			append_dev(div3, t7);
+    			append_dev(div3, h60);
+    			append_dev(div3, t9);
+    			append_dev(div3, h61);
+    			append_dev(div3, t11);
+    			append_dev(div3, h62);
+    			append_dev(div3, t13);
+    			append_dev(div3, h63);
+    			insert_dev(target, t15, anchor);
+    			insert_dev(target, div6, anchor);
     		},
     		p: function update(ctx, dirty) {
     			if (dirty & /*title*/ 1) set_data_dev(t2, /*title*/ ctx[0]);
     		},
     		d: function destroy(detaching) {
-    			if (detaching) detach_dev(div4);
-    			if (detaching) detach_dev(t5);
     			if (detaching) detach_dev(div5);
+    			if (detaching) detach_dev(t15);
+    			if (detaching) detach_dev(div6);
     		}
     	};
 
