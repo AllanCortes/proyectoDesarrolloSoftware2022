@@ -83,7 +83,7 @@
         name="adress"
         type="adress"
         class="input-form"
-        placeholder="ShippingInfo"
+        placeholder="Shipping info"
         on:input={(e) => changeUser(e)}
       />
     </div>
