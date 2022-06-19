@@ -27,4 +27,5 @@ urlpatterns = [
     path('hi', HelloWorld.as_view(), name="helloWorld"),
     path('api-auth/', include('rest_framework.urls')),
     path('products/', ProductAPIView.as_view(), name="all-person"),
+    path('admin/', admin.site.urls),
 ]

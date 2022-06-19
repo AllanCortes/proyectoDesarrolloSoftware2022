@@ -5,11 +5,14 @@ from petlovers.models import (
 )
 
 class UserModelSerializer(serializers.ModelSerializer):
+    
+
     class Meta:
         model = User
         fields = '__all__'
 
 class ProductModelSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Product
         fields = '__all__'
