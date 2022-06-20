@@ -19,6 +19,7 @@ from django.urls import path, include
 from petlovers.views import (
     HelloWorld,
     ProductAPIView,
+    UserAPIView,
 )
 
 
@@ -28,4 +29,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('products/', ProductAPIView.as_view(), name="all-person"),
     path('admin/', admin.site.urls),
+    path('users/', UserAPIView.as_view()),
 ]

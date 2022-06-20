@@ -54,9 +54,18 @@ class UserAPIView(APIView):
         return Response(data=serializer.data, status=200)
 
     def post(self, request):
-        pass
+        serializer = UserModelSerializer(data=request.data)
+
+        if serializer.is_valid():
+            # Caso exitoso
+            validated_data = serializer.validated_data
+            new_user = User.objects.create(**validated_data)
+
+            data = UserModelSerializer(new_user).data
+            return Response(data)
+        else:
+            data = {'error': str(serializer.errors)}
+            return Response(data)
 
     def patch(self, request):
         return Response(data="", status=200)
-        
-
