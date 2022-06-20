@@ -35,11 +35,13 @@ class ProductAPIView(APIView):
             validated_data = serializer.validated_data
             new_product = Product.objects.create(**validated_data)
 
-            status_code = status.HTTP_200_OK
+            
             data = ProductModelSerializer(new_product).data
+            return Response(data)
         else:
-            status_code = status.HTTP_400_BAD_REQUEST
+            
             data = {'error': str(serializer.errors)}
+            return Response(data)
 
 
     def patch(self, request):
