@@ -14,7 +14,7 @@
       [e.target.name]: e.target.value,
     };
   };
-  const loginUser = async () => {
+  const registerUser = async () => {
     try {
       await createUserWithEmailAndPassword(
         auth,
@@ -89,7 +89,7 @@
     </div>
     <br />
     <div class="center">
-      <button class="button-signup fondo-color-signup" on:click={loginUser}> Register </button>
+      <button class="button-signup fondo-color-signup" on:click={registerUser}> Register </button>
     </div>
     <p class="text-center">
       ¿you already have an account? <Link to="/login">Login</Link>

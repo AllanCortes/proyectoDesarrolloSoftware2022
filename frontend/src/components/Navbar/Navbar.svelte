@@ -13,6 +13,13 @@
     DropdownItem
   } from 'sveltestrap';
 
+  import { islogged } from "../../store/store";
+
+  let isloggedUser =false;
+  islogged.subscribe((data)=>{
+    isloggedUser =data;
+  })
+
   let isOpen = false;
 
   function handleUpdate(event) {
@@ -28,12 +35,14 @@
       <NavItem>
         <NavLink href="/">Home</NavLink>
       </NavItem>
-      <NavItem>
-        <NavLink href="/login">Login</NavLink>
-      </NavItem>
-      <NavItem>
-        <NavLink href="/register">Register</NavLink>
-      </NavItem>
+      {#if isloggedUser}
+        <NavItem>
+          <NavLink href="/login">Login</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/register">Register</NavLink>
+        </NavItem>
+      {/if}
       <NavItem>
         <NavLink href="/catalogo">Catalogo</NavLink>
       </NavItem>

@@ -1,7 +1,7 @@
 <script>
     import { Link } from "svelte-navigator";
     import { auth } from "../../firebase";
-    import { createUserWithEmailAndPassword } from "firebase/auth";
+    import { signInWithEmailAndPassword } from "firebase/auth";
     import { useNavigate } from "svelte-navigator";
     const navigate = useNavigate();
 
@@ -17,11 +17,7 @@
     };
     const loginUser = async () => {
       try {
-        await createUserWithEmailAndPassword(
-          auth,
-          credentials.email,
-          credentials.password
-        );
+        await signInWithEmailAndPassword(auth,credentials.email, credentials.password);
         navigate("/");
       } catch (error) {
         console.log(error);
@@ -54,7 +50,7 @@
       </div>
       <br />
       <div class="center">
-        <button class="button-signup fondo-color-signup" > Login </button>
+        <button class="button-signup fondo-color-signup" on:click={loginUser} > Login </button>
       </div>
       <p class="text-center">
         ¿You do not have an account? <Link to="/register">Register</Link>
