@@ -34,6 +34,9 @@
       <NavItem>
         <NavLink href="/register">Register</NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink href="/catalogo">Catalogo</NavLink>
+      </NavItem>
     </Nav>
   </Collapse>
 </Navbar>

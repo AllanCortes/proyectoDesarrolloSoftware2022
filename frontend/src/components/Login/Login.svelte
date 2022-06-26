@@ -4,6 +4,7 @@
     import { createUserWithEmailAndPassword } from "firebase/auth";
     import { useNavigate } from "svelte-navigator";
     const navigate = useNavigate();
+
     let credentials = {
       email: "",
       password: "",
