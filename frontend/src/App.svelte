@@ -5,6 +5,7 @@
 	import Navbar from "./components/Navbar/Navbar.svelte";
 	import { Styles, Button } from 'sveltestrap';
 import Catalogo from "./components/Catalogo.svelte";
+import AddProduct from "./components/addProduct.svelte";
     
     export let title = "Petshop";
   </script>
@@ -50,6 +51,7 @@ import Catalogo from "./components/Catalogo.svelte";
 				<Route path="/login" component={Login} />
 				<Route path="/register" component={Register} />
 				<Route path="/catalogo" component={Catalogo} />
+				<Route path="/addProduct" component={AddProduct} />
 			  </div>
 			  
 		</Router>

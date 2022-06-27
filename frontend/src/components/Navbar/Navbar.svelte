@@ -46,6 +46,9 @@
       <NavItem>
         <NavLink href="/catalogo">Catalogo</NavLink>
       </NavItem>
+      <NavItem>
+        <NavLink href="/addProduct">AddProduct</NavLink>
+      </NavItem>
     </Nav>
   </Collapse>
 </Navbar>

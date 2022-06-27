@@ -38,9 +38,9 @@
     <tbody>
         {#each products as product }
             <tr>
-                <td>{product.productName}</td>
+                <td>{product.product_name}</td>
                 <td>{product.price}</td>
-                <td>{product.typeProduct}</td>
+                <td>{product.type_product}</td>
                 <td>{product.description}</td>
             </tr>
         {/each}
