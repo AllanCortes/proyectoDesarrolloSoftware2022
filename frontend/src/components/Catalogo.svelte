@@ -1,48 +1,83 @@
 <script lang="ts">
-    import { Table } from 'sveltestrap';
-    import {onMount} from "svelte";
-
-    import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
-
-    let products = [];
-    onMount(async () => {
-      const res = await fetch("http://127.0.0.1:8000/products/");
-      products = await res.json();
-  });
-  </script>
-
-
-<Form>
-    <h1 class="text-center">Catalogue</h1>
-    <FormGroup>
-      <Label for="exampleSelect">Sort by</Label>
-      <Input type="select" name="select" id="exampleSelect">
-        <option>Name product</option>
-        <option>Vegetable</option>
-        <option>Dairy</option>
-        <option>4</option>
-        <option>5</option>
-      </Input>
-    </FormGroup>
-  </Form>
+  import { Table } from 'sveltestrap';
+  import {onMount} from "svelte";
   
-  <Table style="background-color: #cfcfcf">
-    <thead>
+  let selectedHeader = "id";
+	let ascendingOrder = true;
+
+  let products = [];
+  const tableHeading = ["id", "productName", "price", "stock", "typeProduct", "description","dateAdded"];
+
+  onMount(async () => {
+    const res = await fetch("http://127.0.0.1:8000/products/");
+    products = await res.json();
+    
+})
+
+	
+	
+	// SORT BY NUMBER
+	const sortByNumber = (colHeader) => {
+		products = products.sort((obj1, obj2) => {
+			return ascendingOrder ? Number(obj1[colHeader]) - Number(obj2[colHeader])
+			: Number(obj2[colHeader]) - Number(obj1[colHeader])
+      
+		});
+		selectedHeader = colHeader;
+	}
+ 
+	// SORT BY STRINGs
+	const sortByString = (colHeader) => {
+		products = products.sort((obj1, obj2) => {
+			if (obj1[colHeader] < obj2[colHeader]) {
+					return -1;
+			} else if (obj1[colHeader] > obj2[colHeader]) {
+				return 1;
+			}
+			return 0; //string code values are equal		
+		});
+		if (!ascendingOrder) {
+			products = products.reverse()
+		}
+		selectedHeader = colHeader;
+	}
+  ;
+</script>
+
+
+<Table style="background-color: #cfcfcf">
+	
+  <thead>
+    <tr>
+      {#each tableHeading as heading}
+      <th class:highlighted={selectedHeader === heading}
+					on:click={() => (heading === "id" || heading === "price"  ) ? sortByNumber(heading) : sortByString(heading)}>
+				{heading.replace("_", " ")}
+
+			{#if heading === selectedHeader}	
+				<span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
+					{@html ascendingOrder ? "&#9661;" : "&#9651;"}
+				</span>		
+			{/if}	
+		</th>	
+      {/each}
+    </tr>
+  </thead>
+  <tbody>
+
+    {#each products as product }
       <tr>
-        <th>Name product</th>
-        <th>Price</th>
-        <th>Type</th>
-        <th>Description</th>
+          <td>{product.id}</td>
+          <td>{product.product_name}</td>
+          <td>{product.price}</td>
+		  <td>{product.stock}</td>
+          <td>{product.type_product}</td>
+          <td>{product.description}</td>
+          <td>{product.dateAdded}</td>
       </tr>
-    </thead>
-    <tbody>
-        {#each products as product }
-            <tr>
-                <td>{product.product_name}</td>
-                <td>{product.price}</td>
-                <td>{product.type_product}</td>
-                <td>{product.description}</td>
-            </tr>
-        {/each}
-    </tbody>
-  </Table>
+    {/each}
+  </tbody>
+  
+  
+</Table>
+

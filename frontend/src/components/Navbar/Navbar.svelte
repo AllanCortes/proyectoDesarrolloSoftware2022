@@ -12,9 +12,12 @@
     DropdownMenu,
     DropdownItem
   } from 'sveltestrap';
-
+  
   import { islogged } from "../../store/store";
+  import { userApi } from "../../Api/userApi";
+  import { navigate } from "svelte-routing";
 
+  
   let isloggedUser =false;
   islogged.subscribe((data)=>{
     isloggedUser =data;
