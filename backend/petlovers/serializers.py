@@ -5,7 +5,7 @@ from petlovers.models import (
 )
 
 class UserModelSerializer(serializers.ModelSerializer):
-    """The user model is made
+    """User Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON
     """
     
 
@@ -14,7 +14,7 @@ class UserModelSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductModelSerializer(serializers.ModelSerializer):
-    """The Product model is made
+    """Product Serializers allow complex data such as querysets and model instances to be converted to native Python datatypes that can then be easily rendered into JSON
     """
     class Meta:
         model = Product

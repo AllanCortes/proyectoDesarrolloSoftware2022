@@ -5,7 +5,10 @@ from django.utils import timezone
 # Create your models here.
 
 class User(models.Model):
-    """Create the user model with all its attributes
+    """It is the user model with its respective attributes
+
+    Args:
+        models (models):A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you're storing
     """
     id = models.AutoField(primary_key=True)
     email = models.EmailField(max_length=255 , unique = True) 
@@ -15,7 +18,10 @@ class User(models.Model):
 
 
 class Product(models.Model):
-    """Create the Product model with all its attributes
+    """It is the Product model with its respective attributes
+
+    Args:
+        models (models):A model is the single, definitive source of information about your data. It contains the essential fields and behaviors of the data you're storing
     """
     id =models.AutoField(primary_key=True)
     product_name = models.CharField(max_length=20)
