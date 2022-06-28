@@ -7,17 +7,37 @@
     Nav,
     NavItem,
     NavLink,
-    Dropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
   } from 'sveltestrap';
+  import { Button } from 'sveltestrap';
+  import { auth } from "../../firebase";
+  import { islogged } from "../../store/store";
+  import { userApi } from "../../Api/userApi";
+  import { navigate } from "svelte-routing";
+  import { useNavigate } from "svelte-navigator";
+  const navigates = useNavigate();
+
+  
+  let isloggedUser =false;
+  islogged.subscribe((data)=>{
+    isloggedUser =data;
+  })
 
   let isOpen = false;
 
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
   }
+
+  function handleLogout(){
+    auth.signOut().then(()=>{
+      console.log("user singned out")
+      console.log(isloggedUser)
+    })
+    localStorage.clear();
+    navigates("/login");
+  };
+
+
 </script>
 
 <Navbar style="background-color: #f7bd53" light expand="md" alt="">
@@ -28,12 +48,25 @@
       <NavItem>
         <NavLink href="/">Home</NavLink>
       </NavItem>
+      {#if isloggedUser =false}
+        <NavItem>
+          <NavLink href="/login">Login</NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/register">Register</NavLink>
+        </NavItem>
+      {/if}
       <NavItem>
-        <NavLink href="/login">Login</NavLink>
+        <NavLink href="/catalogo">Catalogo</NavLink>
       </NavItem>
       <NavItem>
-        <NavLink href="/register">Register</NavLink>
+        <NavLink href="/addProduct">AddProduct</NavLink>
       </NavItem>
+      {#if isloggedUser =true}
+        <NavItem>
+          <Button size="sm" on:click={handleLogout}>Sign Out</Button>
+        </NavItem>
+      {/if}
     </Nav>
   </Collapse>
 </Navbar>

@@ -21,17 +21,33 @@ class HelloWorld(APIView):
 
 class ProductAPIView(APIView):
     """View that lists all the products in the system
+
+    Args:
+        APIView (APIView): 
+
+    Returns:
+        Response: Returns the view of the product
     """
 
     def get(self, request, *args, **kwargs):
         """Back to all products
-        """
+
+        Args:
+            request (request): It is the data delivered through a request
+        Returns:
+            Response: Returns the data of the products
+        """ 
         products = Product.objects.all()
         serializer = ProductModelSerializer(products,many=True)
         return Response(data=serializer.data, status=200)
 
     def post(self, request):
-        """Send product information
+        """ Send product information
+        Args:
+            request (request):  It is the data delivered through a request
+
+        Returns:
+            Responde: Return the shipment of the products      
         """
         serializer = ProductModelSerializer(data=request.data)
 
@@ -57,13 +73,25 @@ class UserAPIView(APIView):
 
     def get(self, request, *args, **kwargs):
         """Back to all user
+
+        Args:
+            request (request): It is the data delivered through a request
+
+        Returns:
+            Response:  Returns the data of the user
+      
         """
         users = User.objects.all()
         serializer = UserModelSerializer(users,many=True)
         return Response(data=serializer.data, status=200)
 
     def post(self, request):
-        """Send user information
+        """ Send user information
+        Args:
+            request (request):  It is the data delivered through a request
+
+        Returns:
+            Responde: Return the shipment of the users      
         """
         serializer = UserModelSerializer(data=request.data)
 
