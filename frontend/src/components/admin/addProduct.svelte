@@ -77,6 +77,6 @@
     <Input type="text" name="text" id="description" bind:value={description_product}/>
   </FormGroup>
   <FormGroup>
-  <Button on:click={formHandler} color="primary"> XD</Button>
+  <Button on:click={formHandler} color="primary"> Create new Product</Button>
   </FormGroup>
 </Form>

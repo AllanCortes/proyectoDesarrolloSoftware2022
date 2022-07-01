@@ -3,7 +3,10 @@
     import { auth } from "../../firebase";
     import { signInWithEmailAndPassword } from "firebase/auth";
     import { useNavigate } from "svelte-navigator";
+    
     const navigate = useNavigate();
+    export let title = "login";
+
 
     let credentials = {
       email: "",
@@ -15,14 +18,26 @@
         [e.target.name]: e.target.value,
       };
     };
-    const loginUser = async () => {
-      try {
-        await signInWithEmailAndPassword(auth,credentials.email, credentials.password);
-        navigate("/");
-      } catch (error) {
-        console.log(error);
-      }
-    };
+    function loginUser(){
+      if(title =="login"){  
+        signInWithEmailAndPassword(auth,credentials.email, credentials.password).then((userCredential) => 
+        {
+          const user = userCredential.user;
+          if(credentials.email == "admin@gmail.com"){
+            localStorage.setItem("admin", user.uid);
+            navigate("/");
+          }
+          if(credentials.email != "admin@gmail.com"){
+            localStorage.setItem("uid", user.uid);
+            navigate("/");
+          }  
+        })
+        .catch((error) =>{
+          console.log(error)
+        });
+    }
+  }
+
   </script>
   
   <div>
@@ -33,6 +48,7 @@
         <input
           name="email"
           type="email"
+          id = "email"
           class="input-form"
           placeholder="Email"
           required
