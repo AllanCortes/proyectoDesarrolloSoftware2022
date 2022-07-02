@@ -1,17 +1,12 @@
 
 <script>
-	const tableHeading = ["product Name", "type Product", "price", "stock", "description","action"];
-	const tableHeading2 = ["product Name", "type Product", "price", "stock", "description","action"];
+	const tableHeading = ["id","product Name", "type Product", "price", "stock", "description","date added"];
+	const tableHeading2 = ["id","product Name", "type Product", "price", "stock", "description","date added"];
 	
 	import { onMount } from 'svelte';
 	import {Table} from 'sveltestrap';
 	import { Styles, Button } from 'sveltestrap';
-
-	import {navigate } from "svelte-navigator";
 	
-	
-	
-  
 	
 	
 	let types = []; 
@@ -20,10 +15,6 @@
 	let selectedHeader = "stock";
 	let ascendingOrder = true;
 	
-	function buyNoLogged(){
-    navigate("/login");
-	}	
-
 	
 	
 	onMount(async () => {
@@ -138,12 +129,14 @@
 	
 			{#each filteredProducts as f}
 				<tr>
+                    <td>{f.id}</td>
 					<td>{f.product_name}</td>
 					<td>{f.type_product}</td>
 					<td>{f.price}</td>
 					<td>{f.stock}</td>
 					<td>{f.description}</td>
-					<td><Button on:click={buyNoLogged} color="primary"> Add to cart </Button></td>
+					<td>{f.dateAdded}</td>
+					
 				</tr>		
 			{/each}
 		</tbody>	
@@ -156,11 +149,11 @@
 			<tr>
 				{#each tableHeading2 as heading}
 				<th class:highlighted={selectedHeader === heading}
-					on:click={() => (heading === "stock" || heading === "price"  ) ? sortByNumber(heading) : sortByString(heading)}>
+					on:click={() => (heading === "stock" || heading === "price" || heading === "id"  ) ? sortByNumber(heading) : sortByString(heading)}>
 				{heading.replace("_", " ")}
 		
   
-				{#if heading === selectedHeader && (selectedHeader=== "stock" || selectedHeader=== "price" )}	
+				{#if heading === selectedHeader && (selectedHeader=== "stock" || selectedHeader=== "date added" || selectedHeader=== "price" || selectedHeader=== "id" )}	
 				<span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
 					{@html ascendingOrder ? "&#9661;" : "&#9651;"}
 				</span>		
@@ -180,13 +173,14 @@
 	
 			{#each products as product}
 				<tr>
+                    <td>{product.id}</td>
 					<td>{product.product_name}</td>
 					<td>{product.type_product}</td>
 					<td>{product.price}</td>
 					<td>{product.stock}</td>
 					<td>{product.description}</td>
-					<td><Button on:click={buyNoLogged} color="primary"> Add to cart </Button></td>
-
+					<td>{product.dateAdded}</td>
+			
 				</tr>		
 			{/each}
 		</tbody>	
