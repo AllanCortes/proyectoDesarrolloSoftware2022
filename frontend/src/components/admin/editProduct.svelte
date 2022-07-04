@@ -3,6 +3,7 @@
     import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
     import { Styles, Button } from 'sveltestrap';
     import { onMount } from 'svelte';
+    import { navigate } from "svelte-navigator";
   
     let selected;
 	  let selected1;
@@ -37,6 +38,10 @@
 				
         
       })
+
+    function viewProducts(){
+      navigate("/ListProduct")
+    }
   
     function formHandler(event) {
       event.preventDefault()
@@ -57,6 +62,7 @@
       })
         .then(response => response.json())
         .then(result => console.log(result))
+        .then(viewProducts)
     }
     
   </script>

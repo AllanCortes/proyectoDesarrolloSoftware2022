@@ -2,6 +2,7 @@
   import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
   import { Styles, Button } from 'sveltestrap';
   import { onMount } from 'svelte';
+  import { navigate } from "svelte-navigator";
 
   let selected;
   let name_product;
@@ -11,7 +12,6 @@
   let stock_product;
   let types = []; 
   let products = []; 
-
 
 
 	onMount(async () => {
@@ -28,11 +28,13 @@
 		}
 		types = types.sort();
 		console.log(types);
-	 
-		
 		
 	  
-    })
+  })
+
+  function viewProducts(){
+      navigate("/ListProduct")
+  }
 
   function formHandler(event) {
     event.preventDefault()
@@ -52,6 +54,7 @@
     })
       .then(response => response.json())
       .then(result => console.log(result))
+      .then(viewProducts)
   }
   console.log(type_product)
 </script>
@@ -108,6 +111,6 @@
     <Input type="text" name="text" id="description" bind:value={description_product}/>
   </FormGroup>
   <FormGroup>
-  <Button on:click={formHandler} color="primary"> Add</Button>
+  <Button on:click={formHandler} on:click={viewProducts} color="primary"> Add</Button>
   </FormGroup>
 </Form>
