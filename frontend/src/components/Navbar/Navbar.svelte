@@ -1,3 +1,4 @@
+
 <script lang="ts">
   import {
     Collapse,
@@ -83,7 +84,10 @@
           <Link to="/editProduct">Edit Product</Link>
         </NavItem> 
         <NavItem>
-          <a class ="nav-link" on:click={logout} to="/login">Sign out</a>
+          <Link to="/ListProduct">Products</Link>
+        </NavItem> 
+        <NavItem>
+          <a class ="nav-link" on:click={logout} href="/login">Sign out</a>
         </NavItem>
       {/if}
       {#if $islogged && email!="admin@gmail.com"}
@@ -97,7 +101,7 @@
         <Link to="/cart">Shopping Cart</Link>
       </NavItem>
       <NavItem>
-        <a class ="nav-link" on:click={logout} to="/login">Sign out</a>
+        <a class ="nav-link" on:click={logout} href="/login">Sign out</a>
       </NavItem>
       {/if}
     </Nav>

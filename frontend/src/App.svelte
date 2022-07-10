@@ -9,9 +9,10 @@
 	import EditProduct from "./components/admin/editProduct.svelte";
     import Cart from "./components/client/cart.svelte";
 	import Buy from "./components/client/buy.svelte"
-
+	import Products from "./components/admin/ListProduct.svelte";
 	import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
 	import { onMount } from "svelte";
+	import { jsPDF } from "jspdf";
 
 
     export let title = "Petshop";
@@ -90,6 +91,7 @@
 				{#if email!= null && email=="admin@gmail.com"}
 				<Route path="/addProduct" component={AddProduct} />
 				<Route path="/editProduct" component={EditProduct} />
+				<Route path="/ListProduct" component={Products} />
 				{/if}
 				{#if email!= null && email!="admin@gmail.com"}
 				<Route path="/buy" component={Buy} />

@@ -1,85 +1,131 @@
 <script lang="ts">
-	import { Table } from 'sveltestrap';
-	import {onMount} from "svelte";
-	import { Styles, Button } from 'sveltestrap';
-	let selectedHeader = "stock";
-	  let ascendingOrder = true;
+	
+    import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
+    import { Styles, Button } from 'sveltestrap';
+    import { onMount } from 'svelte';
+    import { navigate } from "svelte-navigator";
   
-	let products = [];
-	const tableHeading = ["Name", "Price", "Stock", "Type", "Description","Date Added","Action"];
+    let selected;
+	  let selected1;
+    let product_name;
+    let description_product;
+    let price_product;
+    let type_product;
+    let stock_product;
+    let types = []; 
+    let names =[];
+    let products = []; 
+	  let id=0;
   
-	onMount(async () => {
-	  const res = await fetch("http://127.0.0.1:8000/products/");
-	  products = await res.json();
-	  
-  })
   
-	  
-	  
-	  // SORT BY NUMBER
-	  const sortByNumber = (colHeader) => {
-		  products = products.sort((obj1, obj2) => {
-			  return ascendingOrder ? Number(obj1[colHeader]) - Number(obj2[colHeader])
-			  : Number(obj2[colHeader]) - Number(obj1[colHeader])
-		
-		  });
-		  selectedHeader = colHeader;
-	  }
-   
-	  // SORT BY STRINGs
-	  const sortByString = (colHeader) => {
-		  products = products.sort((obj1, obj2) => {
-			  if (obj1[colHeader] < obj2[colHeader]) {
-					  return -1;
-			  } else if (obj1[colHeader] > obj2[colHeader]) {
-				  return 1;
-			  }
-			  return 0; //string code values are equal		
-		  });
-		  if (!ascendingOrder) {
-			  products = products.reverse()
-		  }
-		  selectedHeader = colHeader;
-	  }
-	;
+  
+      onMount(async () => {
+        const res = await fetch("http://127.0.0.1:8000/products/");
+        products = await res.json();
+          
+
+          for (let proObj of products) {
+              if (!names.includes(proObj.product_name)) {
+                names = [...names, proObj.product_name]
+              }
+          }
+          names = names.sort();
+          console.log(names);
+       
+       
+          
+          
+				
+        
+      })
+
+    function viewProducts(){
+      navigate("/ListProduct")
+    }
+  
+    function formHandler(event) {
+      event.preventDefault()
+      let i=selected1;
+        
+      fetch('http://localhost:8000/products/?id='+i,{
+        method:  'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          product_name:product_name,
+          price:price_product,
+          stock:stock_product,
+          description:description_product
+					
+        })
+      })
+        .then(response => response.json())
+        .then(result => console.log(result))
+        .then(viewProducts)
+    }
+    
   </script>
+
   
-  
-  <Table style="background-color: #cfcfcf">
-	  
-	<thead>
-	  <tr>
-		{#each tableHeading as heading}
-		<th class:highlighted={selectedHeader === heading}
-					on:click={() => (heading === "Stock" || heading === "Price"  ) ? sortByNumber(heading) : sortByString(heading)}>
-				{heading.replace("_", " ")}
-		
-  
-			{#if heading === selectedHeader && (selectedHeader=== "Stock" || selectedHeader=== "Date Added" || selectedHeader=== "Type" || selectedHeader=== "Price" )}	
-				<span class="order-icon" on:click={() => ascendingOrder = !ascendingOrder}>
-					{@html ascendingOrder ? "&#9661;" : "&#9651;"}
-				</span>		
-			{/if}	
-		  </th>	
-		{/each}
-	  </tr>
-	</thead>
-	<tbody>
-  
-	  {#each products as product }
-		<tr>
-			
-			<td>{product.product_name}</td>
-			<td>{product.price}</td>
-			<td>{product.stock}</td>
-			<td>{product.type_product}</td>
-			<td>{product.description}</td>
-			<td>{product.dateAdded}</td>
-            <td><Button color="primary"> Edit Product</Button></td>
-		</tr>
-	  {/each}
-	</tbody>
-	
-	
-  </Table>
+
+
+  <Form >
+    <h1 class="text-center text-product">Mod product</h1>
+    <FormGroup>
+        <Label for="exampleSelect">Product Name</Label>
+        <Input type="select" name="select1" id="product_name" bind:value={selected1}>
+          {#each products as product}
+                  <option value={product.id}>{product.product_name}</option>
+									
+						
+          {/each}
+					
+                
+								
+        
+         
+        </Input>
+    </FormGroup>
+		 <FormGroup>
+        <Label for="examplePassword">New Name Product</Label>
+        <Input
+          type="text"
+          name="name"
+          id="name"
+          placeholder="Example: 1000"
+          bind:value={product_name}
+        />
+    </FormGroup>
+		    
+
+   
+    <FormGroup>
+        <Label for="examplePassword">Price</Label>
+        <Input
+          type="text"
+          name="price"
+          id="price"
+          placeholder="Example: 1000"
+          bind:value={price_product}
+        />
+    </FormGroup>
+    <FormGroup>
+      <Label for="examplePassword">Stock</Label>
+      <Input
+        type="text"
+        name="stock"
+        id="stock"
+        placeholder="Example: 1000"
+        bind:value={stock_product}
+      />
+    </FormGroup>
  
+    <FormGroup>
+      <Label for="exampleText">Description</Label>
+      <Input type="text" name="text" id="description" bind:value={description_product}/>
+    </FormGroup>
+    <FormGroup>
+    <Button on:click={formHandler} color="primary"> Apply changes</Button>
+    </FormGroup>
+  </Form>

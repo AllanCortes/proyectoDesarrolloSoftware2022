@@ -1,6 +1,8 @@
 <script lang="ts">
   import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
   import { Styles, Button } from 'sveltestrap';
+  import { onMount } from 'svelte';
+  import { navigate } from "svelte-navigator";
 
   let selected;
   let name_product;
@@ -8,6 +10,35 @@
   let price_product;
   let type_product;
   let stock_product;
+  let types = []; 
+  let products = []; 
+  let image_product;
+
+
+
+	onMount(async () => {
+	  const res = await fetch("http://127.0.0.1:8000/products/");
+	  products = await res.json();
+		
+		
+		
+		
+		for (let proObj of products) {
+			if (!types.includes(proObj.type_product)) {
+				types = [...types, proObj.type_product]
+			}
+		}
+		types = types.sort();
+		console.log(types);
+	 
+		
+		
+	  
+    })
+  function viewProducts(){
+      navigate("/ListProduct")
+  }
+  
 
   function formHandler(event) {
     event.preventDefault()
@@ -22,11 +53,13 @@
         type_product:selected,
         price:price_product,
         stock:stock_product,
-        description:description_product
+        description:description_product,
+        image:image_product
       })
     })
       .then(response => response.json())
       .then(result => console.log(result))
+      .then(viewProducts)
   }
   console.log(type_product)
 </script>
@@ -67,16 +100,27 @@
   <FormGroup>
     <Label for="exampleSelect">Type</Label>
     <Input type="select" name="select" id="type_product" bind:value={selected}>
-      <option {selected}>Fruit</option>
-      <option {selected}>Vegetable</option>
-      <option {selected}>Dairy </option>
+      {#each types as typee}
+			  <option value={typee}>{typee}</option>
+		  {/each}
+     
     </Input>
   </FormGroup>
+  <FormGroup>
+    <Label for="exampleText">Other Type</Label>
+    <Input type="text" name="text" id="type_product" bind:value={selected}/>
+  </FormGroup>
+  
   <FormGroup>
     <Label for="exampleText">Description</Label>
     <Input type="text" name="text" id="description" bind:value={description_product}/>
   </FormGroup>
+
   <FormGroup>
-  <Button on:click={formHandler} color="primary"> Create new Product</Button>
+    <Label for="exampleText">Image</Label>
+    <Input type="text" name="text" id="image" bind:value={image_product}/>
+  </FormGroup>
+  <FormGroup>
+  <Button on:click={formHandler} color="primary"> Add</Button>
   </FormGroup>
 </Form>
