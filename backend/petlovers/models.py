@@ -2,6 +2,7 @@ from datetime import datetime
 from time import time
 from django.db import models
 from django.utils import timezone
+from more_itertools import quantify
 # Create your models here.
 
 class User(models.Model):
@@ -30,3 +31,5 @@ class Product(models.Model):
     price = models.IntegerField(null=True, blank=True)
     stock =models.IntegerField(null=True, blank=True)
     dateAdded = models.DateField(default=datetime.today)
+    image = models.CharField(max_length=200, null=True)
+    quantity = models.IntegerField(null=True, blank=True)
