@@ -8,6 +8,9 @@ import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
 import { navigate } from "svelte-navigator";
 
 const tableHeading = ["Product Name", "Type Product", "Quantity", "Price by unit","Price total by product"];
+var today = new Date();
+
+var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 
 let gotohome="False";
@@ -21,6 +24,11 @@ function viewProducts(){
 	  
 	  
 }
+
+const button = document.getElementById('boton');
+const form = document.getElementById('formulario')
+
+
 onMount(async () => {
         const res = await fetch("http://127.0.0.1:8000/products/");
         products = await res.json();
@@ -240,6 +248,7 @@ function formHandler(event) {
 			
 			
 			<th>Email</th>
+			<th>Date</th>
 			
 			
 		
@@ -257,6 +266,7 @@ function formHandler(event) {
 				
 			
 				<td>{email}</td>
+				<td>{date}</td>
 			
 				
 				

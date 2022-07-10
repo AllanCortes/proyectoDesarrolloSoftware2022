@@ -121,6 +121,6 @@
     <Input type="text" name="text" id="image" bind:value={image_product}/>
   </FormGroup>
   <FormGroup>
-  <Button on:click={formHandler} color="primary"> Add</Button>
+  <Button on:click={formHandler} on:click={viewProducts} color="primary"> Add</Button>
   </FormGroup>
 </Form>
