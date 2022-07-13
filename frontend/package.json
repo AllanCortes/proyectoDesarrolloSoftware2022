@@ -26,6 +26,7 @@
     "svelte-notifications": "^0.9.95",
     "svelte-routing": "^1.6.0",
     "sveltestrap": "^5.9.0",
+    "sweetalert": "^2.1.2",
     "sweetalert2": "^11.4.20"
   }
 }

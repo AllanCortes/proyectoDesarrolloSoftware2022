@@ -3,6 +3,7 @@
   import { auth } from "../../firebase";
   import { createUserWithEmailAndPassword } from "firebase/auth";
   import { useNavigate } from "svelte-navigator";
+
   const navigate = useNavigate();
   let credentials = {
     email: "",
@@ -26,6 +27,72 @@
       console.log(error);
     }
   };
+
+  
+
+
+  var Fn = {
+	// Valida el rut con su cadena completa "XXXXXXXX-X"
+	validaRut : function (rutCompleto) {
+		if (!/^[0-9]+[-|‐]{1}[0-9kK]{1}$/.test( rutCompleto ))
+			return false;
+		var tmp 	= rutCompleto.split('-');
+		var digv	= tmp[1]; 
+		var rut 	= tmp[0];
+		if ( digv == 'K' ) digv = 'k' ;
+		return (Fn.dv(rut) == digv );
+	},
+	dv : function(T){
+		var M=0,S=1;
+		for(;T;T=Math.floor(T/10))
+			S=(S+T%10*(9-M++%6))%11;
+		return S?S-1:'k';
+	}
+}
+
+
+  function formHandler(event) {
+    event.preventDefault()
+
+    var RUT= credentials.rut;
+    if(Fn.validaRut(RUT)== true){
+    fetch('http://localhost:8000/users/',{
+      method:  'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name:credentials.name,
+        email:credentials.email,
+        rut:credentials.rut,
+        password:credentials.password,
+        number:credentials.number,
+        adress:credentials.adress,
+      })
+    })
+      .then(response => response.json())
+      .then(result => console.log(result))
+
+      createUserWithEmailAndPassword(
+        auth,
+        credentials.email,
+        credentials.password
+      );
+      navigate("/");
+    }
+
+    else{ 
+      swal('The Rut is invalid, remember that the Rut must exist and also use - at the end. Thank you');
+    }
+
+ 
+  }
+
+
+
+
+
+
 </script>
 
 <div>
@@ -34,8 +101,8 @@
     <h1 class="text-center text-login">Register</h1>
      <div class="center">
       <input
-        name="Name"
-        type="Name"
+        name="name"
+        type="name"
         class="input-form"
         placeholder="Fist name"
         on:input={(e) => changeUser(e)}
@@ -43,10 +110,10 @@
     </div>
     <div class="center">
       <input
-        name="Rut"
-        type="Rut"
+        name="rut"
+        type="rut"
         class="input-form"
-        placeholder="Rut"
+        placeholder="Rut, Ej: 20211694-9"
         required
         on:input={(e) => changeUser(e)}
       />
@@ -89,7 +156,7 @@
     </div>
     <br />
     <div class="center">
-      <button class="button-signup fondo-color-signup" on:click={registerUser}> Register </button>
+      <button class="button-signup fondo-color-signup" on:click={formHandler}> Register </button>
     </div>
     <p class="text-center">
       ¿you already have an account? <Link to="/login">Login</Link>

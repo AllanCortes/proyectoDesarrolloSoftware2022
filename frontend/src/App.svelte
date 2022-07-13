@@ -13,6 +13,7 @@
 	import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
 	import { onMount } from "svelte";
 	import { jsPDF } from "jspdf";
+	import { swal } from "sweetalert";
 
 
     export let title = "Petshop";
