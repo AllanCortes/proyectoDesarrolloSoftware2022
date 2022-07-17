@@ -1,3 +1,4 @@
+
 <script lang="ts">
   import { Form, FormGroup,  Input, Label } from 'sveltestrap';
   import {  Button } from 'sveltestrap';
@@ -113,4 +114,3 @@
   <FormGroup>
   <Button on:click={formHandler} color="primary"> Add</Button>
   </FormGroup>
-</Form>

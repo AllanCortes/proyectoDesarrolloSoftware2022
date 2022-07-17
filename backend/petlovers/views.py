@@ -1,4 +1,6 @@
-from itertools import product 
+
+from itertools import product
+
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -35,7 +37,10 @@ class ProductAPIView(APIView):
         Response: Returns the view of the product with the list of all the products in the system
     """
     def get_queryset(self):
+
         product = Product.objects.all() #product store all products 
+
+
         return product
 
     def get(self, request, *args, **kwargs):
@@ -49,16 +54,20 @@ class ProductAPIView(APIView):
         """ 
 
         try:
+
             id = request.query_params["id"] #get the id of the product
             if id != None: #if id doesnt match with any id of the products then create a new product
                 product = Product.objects.get(id=id)#save product by the id 
                 serializer = ProductModelSerializer(product) # create the serializer for this product
+
         except:
             products = self.get_queryset()
             serializer = ProductModelSerializer(products, many=True)
 
+
         return Response(data=serializer.data, status=200)#send the reqsponse with all the data of the serializer, 
         #also with the status 200 what means OK
+
 
     def post(self, request):
         """ Send product information
@@ -80,6 +89,7 @@ class ProductAPIView(APIView):
         else:
             data = {'error': str(serializer.errors)}
             return Response(data)
+
 
     def put(self, request):
         """
@@ -110,6 +120,7 @@ class ProductAPIView(APIView):
         return Response(serializer.data)
 
     
+
 
 class UserAPIView(APIView):
     """View that lists all the  users in the system
