@@ -1,25 +1,19 @@
+
 <script lang="ts">
   import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
   } from 'sveltestrap';
   import { onMount } from "svelte";
-  import { Button } from 'sveltestrap';
   import { auth } from "../../firebase";
   import { islogged} from "../../store/store";
-  //import { userApi } from "../../Api/userApi";
   import { navigate } from "svelte-routing";
-  import { useNavigate } from "svelte-navigator";
+  import { Link } from "svelte-navigator";
   import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
-  import { prevent_default } from 'svelte/internal';
-
-
-
+ 
   let isOpen = false;
   let email ;
 
@@ -61,27 +55,30 @@
     <Nav class="ms-auto" navbar>
       {#if !$islogged}
       <NavItem>
-        <NavLink href="/">Home</NavLink>
+        <Link class ="nav-link" to="/">Home</Link>
       </NavItem>
       <NavItem>
-        <NavLink href="/catalogo">Cataloge</NavLink>
+        <Link class ="nav-link" to="/catalogo">Cataloge</Link>
       </NavItem>
       <NavItem>
-        <NavLink href="/login">Login</NavLink>
+        <Link class ="nav-link" to="/login">Login</Link>
       </NavItem>
       <NavItem>
-        <NavLink href="/register">Register</NavLink>
+        <Link class ="nav-link" to="/register">Register</Link>
       </NavItem>
       {/if}
       {#if $islogged && email=="admin@gmail.com"}
       <NavItem>
-        <NavLink href="/">Home</NavLink>
+        <Link class ="nav-link" to="/">Home</Link>
       </NavItem>
         <NavItem>
-          <NavLink href="/addProduct">Add Product</NavLink>
+          <Link class ="nav-link" to="/addProduct">Add Product</Link>
         </NavItem> 
         <NavItem>
-          <NavLink href="/editProduct">Edit Product</NavLink>
+          <Link class ="nav-link" to="/editProduct">Edit Product</Link>
+        </NavItem> 
+        <NavItem>
+          <Link class ="nav-link" to="/ListProduct">Products</Link>
         </NavItem> 
         <NavItem>
           <NavLink href="/ListProduct">Products</NavLink>
@@ -92,13 +89,13 @@
       {/if}
       {#if $islogged && email!="admin@gmail.com"}
       <NavItem>
-        <NavLink href="/">Home</NavLink>
+        <Link class ="nav-link" to="/">Home</Link>
       </NavItem>
       <NavItem>
-        <NavLink href='/buy'>Cataloge</NavLink>
+        <Link class ="nav-link" to='/buy'>Cataloge</Link>
       </NavItem>
       <NavItem>
-        <NavLink href="/cart">Shopping Cart</NavLink>
+        <Link class ="nav-link" to="/cart">Shopping Cart</Link>
       </NavItem>
       <NavItem>
         <a class ="nav-link" on:click={logout} href="/login">Sign out</a>
