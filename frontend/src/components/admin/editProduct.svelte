@@ -1,29 +1,21 @@
 <script lang="ts">
 	
-    import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
-    import { Styles, Button } from 'sveltestrap';
+    import { Form, FormGroup, Input, Label } from 'sveltestrap';
+    import {  Button } from 'sveltestrap';
     import { onMount } from 'svelte';
     import { navigate } from "svelte-navigator";
-  
-    let selected;
+
 	  let selected1;
     let product_name;
     let description_product;
     let price_product;
-    let type_product;
     let stock_product;
-    let types = []; 
     let names =[];
     let products = []; 
-	  let id=0;
-  
-  
-  
+
       onMount(async () => {
         const res = await fetch("http://127.0.0.1:8000/products/");
         products = await res.json();
-          
-
           for (let proObj of products) {
               if (!names.includes(proObj.product_name)) {
                 names = [...names, proObj.product_name]
@@ -31,12 +23,6 @@
           }
           names = names.sort();
           console.log(names);
-       
-       
-          
-          
-				
-        
       })
 
     function viewProducts(){
@@ -56,35 +42,22 @@
           product_name:product_name,
           price:price_product,
           stock:stock_product,
-          description:description_product
-					
+          description:description_product		
         })
       })
         .then(response => response.json())
         .then(result => console.log(result))
         .then(viewProducts)
     }
-    
   </script>
-
-  
-
-
   <Form >
-    <h1 class="text-center text-product">Mod product</h1>
+    <h1 class="text-center text-product">Edit Product</h1>
     <FormGroup>
         <Label for="exampleSelect">Product Name</Label>
         <Input type="select" name="select1" id="product_name" bind:value={selected1}>
           {#each products as product}
                   <option value={product.id}>{product.product_name}</option>
-									
-						
           {/each}
-					
-                
-								
-        
-         
         </Input>
     </FormGroup>
 		 <FormGroup>
@@ -97,9 +70,6 @@
           bind:value={product_name}
         />
     </FormGroup>
-		    
-
-   
     <FormGroup>
         <Label for="examplePassword">Price</Label>
         <Input
@@ -120,7 +90,6 @@
         bind:value={stock_product}
       />
     </FormGroup>
- 
     <FormGroup>
       <Label for="exampleText">Description</Label>
       <Input type="text" name="text" id="description" bind:value={description_product}/>

@@ -1,29 +1,24 @@
 <script>
-	import { Router, Route, Link, navigate } from "svelte-navigator";
+	import { Router, Route, navigate } from "svelte-navigator";
 	import Login from "./components/Login/Login.svelte";
 	import Register from "./components/Register/Register.svelte";
 	import Navbar from "./components/Navbar/Navbar.svelte";
-	import { Styles, Button } from 'sveltestrap';
+	import { Styles} from 'sveltestrap';
 	import Catalogo from "./components/Catalogo.svelte";
 	import AddProduct from "./components/admin/addProduct.svelte";
 	import EditProduct from "./components/admin/editProduct.svelte";
     import Cart from "./components/client/cart.svelte";
 	import Buy from "./components/client/buy.svelte"
 	import Products from "./components/admin/ListProduct.svelte";
-	import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
+	import { getAuth,onAuthStateChanged } from "firebase/auth";
 	import { onMount } from "svelte";
-	import { jsPDF } from "jspdf";
-	import { swal } from "sweetalert";
-
 
     export let title = "Petshop";
-
 	let email;
 	let url='';
 	//users routes
 	let buy= "http://localhost:8080/buy";
 	let cart ="http://localhost:8080/cart";
-
 	//admin
 	let addProduct= "http://localhost:8080/addProduct";
 	let editProduct= "http://localhost:8080/editProduct";
@@ -58,9 +53,7 @@
 			<div>
 				<Navbar />
 				<Route path="/">
-
 				<div> 	
-				
 					<div>
 						<div class ="row">
 							<div class ="col-md-4">
@@ -70,7 +63,6 @@
 							   		  <h1> {title} </h1>
 							   <h1> La plataforma online de la mejor tienda de mascotas </h1>
 							   </div>
-
 		 				</div>
 						 <div aling="center">
 							<h5> PetLovers was born in 2020, in the city of Antofagasta. We opened our store with the desire and illusion of becoming a relevant actor in the lives of pets and their owners.
@@ -81,9 +73,7 @@
 							<h6>We aim to deliver a service of excellence.</h6>
 						</div>
 	 				</div>
-					 
 				</div>
-			
 			<div>
 				</Route>
 				<Route path="/login" component={Login} />
@@ -98,8 +88,6 @@
 				<Route path="/buy" component={Buy} />
 				<Route path="/cart" component={Cart} />
 				{/if}
-			  </div>
-			  
+			  </div>  
 		</Router>
-		
 	  </div>

@@ -3,30 +3,20 @@
 	const tableHeading = ["Order by price highest to lowest","Order by price lowest to highest","Order by stock highest to lowest",
 	"Order by stock lowest to highest","Order by old added","Order by recent added"];
 	
-	
 	import { onMount } from 'svelte';
-	import {Table} from 'sveltestrap';
-	import { Styles, Button } from 'sveltestrap';
 	import { cart } from "../../store/store.js";
-	
-
-  
-	
 	
     let types = []; 
 	let selectedOption = "";
 	let selectedType = "";
 	
 	let products = [];
-	let selectedHeader = "stock";
 	let ascendingOrder = true;
 	
 	
 	onMount(async () => {
 	  const res = await fetch("http://127.0.0.1:8000/products/");
 	  products = await res.json();
-
-		
 		for (let proObj of products) {
 			if (!types.includes(proObj.type_product)) {
 				types = [...types, proObj.type_product]
@@ -34,14 +24,9 @@
 		}
 		types = types.sort();
 		console.log(types);
-	 
-
-	  
     })
 	
-
 	const sortByNumber = () => {
-		  
 		  products = products.sort((obj1, obj2) => {
 			  return ascendingOrder ? Number(obj1['price']) - Number(obj2['price'])
 			  : Number(obj2['price']) - Number(obj1['price'])
@@ -76,24 +61,6 @@
 		  });
 		 
 	}
-	const sortByNumberdate = () => {
-		  
-		  products = products.sort((obj1, obj2) => {
-			  return ascendingOrder ? Number(obj1['dateAdded']) - Number(obj2['dateAdded'])
-			  : Number(obj2['dateAdded']) - Number(obj1['dateAdded'])
-		
-		  });
-		 
-	}
-	const sortByNumberdatel = () => {
-		  
-		  products = products.sort((obj1, obj2) => {
-			  return !ascendingOrder ? Number(obj1['dateAdded']) - Number(obj2['dateAdded'])
-			  : Number(obj2['dateAdded']) - Number(obj1['dateAdded'])
-		
-		  });
-		 
-	}
 	const sortByStringA = () => {
 		  products = products.sort((obj1, obj2) => {
 			  if (obj1['dateAdded'] < obj2['dateAdded']) {
@@ -121,8 +88,6 @@
 		 
 	}
 
-
-
 	$: if (selectedOption==="Order by price lowest to highest") sortByNumber();
 	$: if (selectedOption==="Order by price highest to lowest") sortByNumberl();
 
@@ -132,49 +97,36 @@
 	$: if (selectedOption==="Order by recent added") sortByStringA();
 	$: if (selectedOption==="Order by old added") sortByString ();
 	
-
-	
-	
 	// Query results
 	let filteredProducts = [];
 	
 	// For Select Menu
 	$: if (selectedType) getProductsByTypes();
 
-	
 	const getProductsByTypes = () => {
 		// resets search input if menu is being used
-		
-		
 		if (selectedType === "all") {
 			return filteredProducts = [];
 		} 
 		return filteredProducts = products.filter(product => product.type_product === selectedType);
-
 	}	
 
-	
 	//cart
 	const addToCart = (product) => {
 		if (product.stock > 0){
 			for(let item of $cart) {
 					if(item.id === product.id) {
 						if (product.stock>product.quantity){
-
-						
 						product.quantity += 1
 						$cart = $cart;
 						console.log($cart)
 						return;
 						}
-						
 					}
 			}
-		
 			$cart = [...$cart, product]
 			console.log($cart)
 		}
-	
 	}
 	const minusItem = (product) => {
 		for(let item of $cart) {
@@ -205,29 +157,13 @@
 			}
 		}
 	}
-
-	
-	
-	
-	
-	
 	$: total = $cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-	
-
-	
-	
-
-
-	
-		
-	
 </script>
 
 
 
 <div class="cart-list">
 	<h4>Shoping cart</h4>
-	
 	{#each $cart as item }
 		{#if item.quantity > 0}
 		<div class="cart-item">
@@ -235,17 +171,13 @@
 			<div>{item.quantity}
 				<button on:click={() => plusItem(item)}>+</button>
 				<button on:click={() => minusItem(item)}>-</button>
-				
 			</div>
 			<p>${item.price * item.quantity}</p>
 		</div>
 		{/if}
 	{/each}
-	
 	<div class="total">
-		
 		<h4>Total:${total}</h4>
-		
 	</div>
 </div>
 

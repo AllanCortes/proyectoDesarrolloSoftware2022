@@ -15,21 +15,6 @@
       [e.target.name]: e.target.value,
     };
   };
-  const registerUser = async () => {
-    try {
-      await createUserWithEmailAndPassword(
-        auth,
-        credentials.email,
-        credentials.password
-      );
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  
-
 
   var Fn = {
 	// Valida el rut con su cadena completa "XXXXXXXX-X"
@@ -80,24 +65,15 @@
       );
       navigate("/");
     }
-
     else{ 
       swal('The Rut is invalid, remember that the Rut must exist and also use - at the end. Thank you');
     }
-
- 
   }
-
-
-
-
-
-
 </script>
 
 <div>
   <br /><br /><br />
-  <div class="form-signin">
+  <div class="form-signin"required>
     <h1 class="text-center text-login">Register</h1>
      <div class="center">
       <input
@@ -108,7 +84,7 @@
         on:input={(e) => changeUser(e)}
       />
     </div>
-    <div class="center">
+    <div class="center"required>
       <input
         name="rut"
         type="rut"
@@ -118,7 +94,7 @@
         on:input={(e) => changeUser(e)}
       />
     </div>
-    <div class="center">
+    <div class="center"required>
       <input
         name="email"
         type="email"
@@ -127,7 +103,7 @@
         on:input={(e) => changeUser(e)}
       />
     </div>
-    <div class="center">
+    <div class="center"required >
       <input
         name="password"
         type="password"
@@ -136,7 +112,7 @@
         on:input={(e) => changeUser(e)}
       />
     </div>
-    <div class="center">
+    <div class="center"required>
       <input
         name="number"
         type="number"
@@ -145,7 +121,7 @@
         on:input={(e) => changeUser(e)}
       />
     </div>
-    <div class="center">
+    <div class="center" required>
       <input
         name="adress"
         type="adress"

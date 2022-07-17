@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
-  import { Styles, Button } from 'sveltestrap';
+  import { Form, FormGroup,  Input, Label } from 'sveltestrap';
+  import {  Button } from 'sveltestrap';
   import { onMount } from 'svelte';
   import { navigate } from "svelte-navigator";
 
@@ -15,14 +15,9 @@
   let image_product;
 
 
-
 	onMount(async () => {
 	  const res = await fetch("http://127.0.0.1:8000/products/");
 	  products = await res.json();
-		
-		
-		
-		
 		for (let proObj of products) {
 			if (!types.includes(proObj.type_product)) {
 				types = [...types, proObj.type_product]
@@ -30,19 +25,12 @@
 		}
 		types = types.sort();
 		console.log(types);
-	 
-		
-		
-	  
     })
   function viewProducts(){
       navigate("/ListProduct")
   }
-  
-
   function formHandler(event) {
     event.preventDefault()
-
     fetch('http://localhost:8000/products/',{
       method:  'POST',
       headers: {
@@ -118,9 +106,9 @@
 
   <FormGroup>
     <Label for="exampleText">Image</Label>
-    <Input type="text" name="text" id="image" bind:value={image_product}/>
+    <Input type="text" name="text" id="image" bind:value={image_product} placeholder="Add image URL"/>
   </FormGroup>
   <FormGroup>
-  <Button on:click={formHandler} on:click={viewProducts} color="primary"> Add</Button>
+  <Button on:click={formHandler} color="primary"> Add</Button>
   </FormGroup>
 </Form>
