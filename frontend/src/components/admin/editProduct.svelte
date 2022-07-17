@@ -1,6 +1,5 @@
 <script lang="ts">
 	
-
   import { Form, FormGroup, FormText, Input, Label } from 'sveltestrap';
   import { Styles, Button } from 'sveltestrap';
   import { onMount } from 'svelte';
@@ -11,10 +10,9 @@
   let product_name;
   let description_product;
   let price_product;
-
+  
   let stock_product;
   
-
   let product_names =[];
   let products = []; 
   
@@ -131,4 +129,3 @@
   <Button on:click={formHandler} color="primary"> Apply changes</Button>
   </FormGroup>
 </Form>
-

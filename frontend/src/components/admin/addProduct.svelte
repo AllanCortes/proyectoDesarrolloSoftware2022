@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import { Form, FormGroup,  Input, Label } from 'sveltestrap';
   import {  Button } from 'sveltestrap';
@@ -28,9 +27,8 @@
 		console.log(types);
     })
   function viewProducts(){
-    navigate("/ListProduct")
+      navigate("/ListProduct")
   }
-
   function formHandler(event) {
     event.preventDefault()
     fetch('http://localhost:8000/products/',{
@@ -49,8 +47,7 @@
     })
       .then(response => response.json())
       .then(result => console.log(result))
-      .then(viewProducts)
-      
+      navigate("/ListProduct")
   }
   console.log(type_product)
 </script>
@@ -114,3 +111,4 @@
   <FormGroup>
   <Button on:click={formHandler} color="primary"> Add</Button>
   </FormGroup>
+</Form>

@@ -1,16 +1,11 @@
-
 <script>
 	const tableHeading = ["Order by price highest to lowest","Order by price lowest to highest","Order by stock highest to lowest",
 	"Order by stock lowest to highest","Order by old added","Order by recent added"];
 	
-
-
-
 	
 	import { onMount } from 'svelte';
 	import {Table} from 'sveltestrap';
 	import { Styles, Button } from 'sveltestrap';
-
 	import { cart } from "../../store/store.js";
 	
 
@@ -27,7 +22,6 @@
 	  const res = await fetch("http://127.0.0.1:8000/products/");
 	  products = await res.json();
 
-
 		
 		for (let proObj of products) {
 			if (!types.includes(proObj.type_product)) {
@@ -38,20 +32,17 @@
 		console.log(types);
 	 
 
-
 	  
     })
 	
 
 	const sortByNumber = () => {
 		  
-
 		  products = products.sort((obj1, obj2) => {
 			  return ascendingOrder ? Number(obj1['price']) - Number(obj2['price'])
 			  : Number(obj2['price']) - Number(obj1['price'])
 		
 		  });
-
 		 
 	}
 	const sortByNumbers = () => {
@@ -93,7 +84,6 @@
 		  });
 		
 		  
-
 	}
 	const sortByString = (colHeader) => {
 		  products = products.sort((obj1, obj2) => {
@@ -104,7 +94,6 @@
 			  }
 			  return 0; //string code values are equal		
 		  });
-
 		 
 		  products = products.reverse()
 		  
@@ -323,10 +312,8 @@
 </div>
 	
 {/if}
-
 	
 </main>	
-
 
 
 
@@ -358,4 +345,3 @@
     
     
 </style>
-

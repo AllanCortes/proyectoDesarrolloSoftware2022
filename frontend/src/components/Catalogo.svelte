@@ -1,5 +1,4 @@
 
-
 <script>
 	const tableHeading = ["Order by price highest to lowest","Order by price lowest to highest","Order by stock highest to lowest",
 	"Order by stock lowest to highest","Order by old added","Order by recent added"];
@@ -245,7 +244,3 @@
 	}
 	
 </style>
-
-
-
-

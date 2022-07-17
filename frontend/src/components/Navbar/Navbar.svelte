@@ -49,7 +49,7 @@
 
 <Navbar style="background-color: #f7bd53" light expand="md" alt="">
   <!-- svelte-ignore a11y-missing-attribute -->
-  <img src="https://i.ibb.co/1nZpY9H/Pet-Lovers-1-removebg-preview.png" width="270" height="120" alt="" />
+  <img src="https://i.ibb.co/1nZpY9H/Pet-Lovers-1-removebg-preview.png" width="270" height="120" />
   <NavbarToggler on:click={() => (isOpen = !isOpen)} />
   <Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
     <Nav class="ms-auto" navbar>
@@ -79,9 +79,6 @@
         </NavItem> 
         <NavItem>
           <Link class ="nav-link" to="/ListProduct">Products</Link>
-        </NavItem> 
-        <NavItem>
-          <NavLink href="/ListProduct">Products</NavLink>
         </NavItem> 
         <NavItem>
           <a class ="nav-link" on:click={logout} href="/login">Sign out</a>

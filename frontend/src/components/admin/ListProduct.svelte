@@ -1,4 +1,3 @@
-
 <script>
 	const tableHeading = ["id","product Name", "type Product", "price", "stock", "description","date added"];
 	const tableHeading2 = ["id","product Name", "type Product", "price", "stock", "description","date added"];
