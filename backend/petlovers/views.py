@@ -17,6 +17,11 @@ from petlovers.serializers import (
     UserModelSerializer,
 )
 
+class HelloWorld(APIView):
+    def get(self, request):
+
+        return Response(data="Hello, World :c", status=200)
+
 class ProductAPIView(APIView):
     """View that lists all the products in the system
     

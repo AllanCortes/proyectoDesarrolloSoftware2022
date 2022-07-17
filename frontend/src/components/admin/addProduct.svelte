@@ -27,8 +27,9 @@
 		console.log(types);
     })
   function viewProducts(){
-      navigate("/ListProduct")
+    navigate("/ListProduct")
   }
+
   function formHandler(event) {
     event.preventDefault()
     fetch('http://localhost:8000/products/',{
@@ -48,6 +49,7 @@
       .then(response => response.json())
       .then(result => console.log(result))
       .then(viewProducts)
+      
   }
   console.log(type_product)
 </script>
