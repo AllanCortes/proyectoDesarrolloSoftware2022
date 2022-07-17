@@ -1,29 +1,45 @@
 <script>
 	import { cart } from "../../store/store.js";
 	import {onMount} from "svelte";
+	import { Styles, Button } from 'sveltestrap';
 	import { jsPDF  } from "jspdf";
 	import autoTable from 'jspdf-autotable';
-	import { getAuth,onAuthStateChanged } from "firebase/auth";
+	import { getAuth,signOut,onAuthStateChanged } from "firebase/auth";
+	import { navigate } from "svelte-navigator";
 	const tableHeading = ["Product Name", "Type Product", "Quantity", "Price by unit","Price total by product"];
 	var today = new Date();
 	var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 	let gotohome="False";
+	let products=[];
 	let Users=[];
 	let Usuario=[];
+	let email;
+	let name_user;
+	function viewProducts(){
+		  navigate("/")
+		  
+		  
+		  
+	}
 	const button = document.getElementById('boton');
 	const form = document.getElementById('formulario')
-
 	onMount(async () => {
 			const res = await fetch("http://127.0.0.1:8000/products/");
 			products = await res.json();
+			  
+			 
+		   
+			  
+			  
+					
+			
 		  })
-
 	onMount(() => {
 		const auth = getAuth();
 		onAuthStateChanged(auth, (user) => {
 			if(user !==null){
 				email = user.email;
-				namess = user.name;
+				name_user = user.name;
 			}
 		});
 	  });
@@ -35,18 +51,25 @@
 	  const res = await fetch("http://127.0.0.1:8000/users/");
 	  Users = await res.json();
 		
+		
+
 	  Users.forEach(Users => {
 		if(Users.email == user.email){
 			Usuario = [Users.email,Users.rut,Users.adress,Users.number];
 		
 		}
 	  })
+
+	
     })
 	
+
 	const PDFREAD= (async() => {
 		const res = await fetch("http://127.0.0.1:8000/users/");
 	  	Users = await res.json();
 		
+		
+
 	  Users.forEach(Users => {
 		if(Users.email == user.email){
 			Usuario = [Users.name,Users.email,Users.rut,Users.adress,Users.number];
@@ -72,6 +95,11 @@
 			
 			
 	});
+
+
+
+
+
 
 	const minusItem = (product) => {
 			for(let item of $cart) {
@@ -131,12 +159,20 @@
 			})
 			  })
 			.then(response => response.json())
-			.then(result => console.log(result)) 
+			.then(result => console.log(result))
+			
+				  
 			} 
+		  
 	}
 	</script>
+	
+	
+	
+	
 	<div class="cart-list">
 		<h4>Shoping cart</h4>
+		
 		{#each $cart as item }
 			{#if item.quantity > 0}
 			<div class="cart-item">
@@ -144,17 +180,26 @@
 				<div>{item.quantity}
 					<button on:click={() => plusItem(item)}>+</button>
 					<button on:click={() => minusItem(item)}>-</button>
+					
 				</div>
 				<p>${item.price * item.quantity}</p>
 			</div>
 			{/if}
+		
+	   
 		{/each}
+		
 		<div class="total">
+			
 			<h4>Total:${total}</h4>
+			
 		</div>
 		<button on:click={()=>PDFREAD()}
 		 on:click={formHandler}>Checkout</button>
 	</div>
+	
+	
+	
 	<table id="basic-tablee" style="display: none;">
 		<thead>
 			<tr>
@@ -162,32 +207,57 @@
 					<th>{heading}</th>
 				  
 				{/each}
+			
+			
+			
 			</tr>
+			
+	
 		</thead>
 		<tbody>
+	
+	  
+	
 			{#each $cart as f}
-				<tr>	
+				<tr>
+					
 					<td>{f.product_name}</td>
 					<td>{f.type_product}</td>
 					<td>{f.quantity}</td>
 					<td>{f.price}</td>
 					<td>{f.price * f.quantity}</td>
+					
+					
+					
+					
+					
 				</tr>		
 			{/each}
 		</tbody>	
+	
+	
 	</table>
 	<table id="basic-table" style="display: none;">
 		<thead>
 			<tr>
+				
 				<th>Name</th>
 				<th>Email</th>
 				<th>Date</th>
 				<th>Rut</th>
 				<th>Number</th>
 				<th>Adress</th>
+			
+			
 			</tr>
+			
+	
 		</thead>
 		<tbody>
+	
+			
+		
+
 			{#each Users as UsersAct}
 				{#if UsersAct.email == user.email}
 				<tr>
@@ -197,23 +267,56 @@
 					<td>{UsersAct.rut}</td>
 					<td>{UsersAct.number}</td>
 					<td>{UsersAct.adress}</td>
+			
 				</tr>	
 				{/if}	
 			{/each}
 		</tbody>	
+	
+	
 	</table>
+	
 	<table id="basic-table" style="display: none;">
 		<thead>
 			<tr>
+				
 				<th>Total</th>
+				
+				
+				
+			
+			
 			</tr>
+			
+	
 		</thead>
 		<tbody>
+	
+	  
+	
+			
 				<tr>
+					
 					<td>{total}</td>
+					
+				
+					
+					
+					
 				</tr>		
+			
 		</tbody>	
+	
+	
 	</table>
+	
+	
+	
+	
+	
+	
+	
+	
 	<style>
 		
 		.cart-item {
@@ -230,5 +333,6 @@
 		  border: 2px solid;
 		  padding: 10px;
 		}
+	  
 	  
 	</style>

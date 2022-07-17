@@ -1,4 +1,3 @@
-
 <script>
 	const tableHeading = ["id","product Name", "type Product", "price", "stock", "description","date added"];
 	const tableHeading2 = ["id","product Name", "type Product", "price", "stock", "description","date added"];
@@ -31,11 +30,9 @@
 		}
 		types = types.sort();
 		console.log(types);
-	 
-		
-		
-	  
+ 
     })
+
 	const sortByNumber = (colHeader) => {
 		  products = products.sort((obj1, obj2) => {
 			  return ascendingOrder ? Number(obj1[colHeader]) - Number(obj2[colHeader])
@@ -59,31 +56,22 @@
 		  selectedHeader = colHeader;
 	}
 	
-	
 
-
-	
-	
-	
-	
-	
-	
-	
 	// Query results
-	let filteredProducts = [];
+	let filtered_Products = [];
 	
 	// For Select Menu
-	$: if (selectedType) getBooksByLang();
-	$: console.log(filteredProducts, selectedType);
+	$: if (selectedType) getTypes();
+	$: console.log(filtered_Products, selectedType);
 	
-	const getBooksByLang = () => {
+	const getTypes = () => {
 		// resets search input if menu is being used
 		
 		
 		if (selectedType === "all") {
-			return filteredProducts = [];
+			return filtered_Products = [];
 		} 
-		return filteredProducts = products.filter(product => product.type_product === selectedType);
+		return filtered_Products = products.filter(product => product.type_product === selectedType);
 
 	}	
 		
@@ -108,7 +96,7 @@
 <main id="bookshelf">
 	
 	
-	{#if filteredProducts.length > 0}
+	{#if filtered_Products.length > 0}
 	<Table style="background-color: #cfcfcf">
 		<thead>
 			<tr>
@@ -116,26 +104,20 @@
 					<th>{heading}</th>
 		  		
 				{/each}
-			
-			
-			
-			</tr>
-			
 	
+			</tr>
 		</thead>
 		<tbody>
-  
-	  
-	
-			{#each filteredProducts as f}
+ 
+			{#each filtered_Products as filtered_Product}
 				<tr>
-                    <td>{f.id}</td>
-					<td>{f.product_name}</td>
-					<td>{f.type_product}</td>
-					<td>{f.price}</td>
-					<td>{f.stock}</td>
-					<td>{f.description}</td>
-					<td>{f.dateAdded}</td>
+                    <td>{filtered_Product.id}</td>
+					<td>{filtered_Product.product_name}</td>
+					<td>{filtered_Product.type_product}</td>
+					<td>{filtered_Product.price}</td>
+					<td>{filtered_Product.stock}</td>
+					<td>{filtered_Product.description}</td>
+					<td>{filtered_Product.dateAdded}</td>
 					
 				</tr>		
 			{/each}
@@ -160,17 +142,13 @@
 				{/if}	
 		  		</th>	
 				{/each}
-			
-			
-			
+
 			</tr>
 			
 	
 		</thead>
 		<tbody>
-  
-	  
-	
+
 			{#each products as product}
 				<tr>
                     <td>{product.id}</td>

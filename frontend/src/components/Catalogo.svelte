@@ -11,14 +11,14 @@
 	
 	
 	
-	let cart=[];
+	
 	
     let types = []; 
-	let selectedOption = "";
-	let selectedType = "";
+	let selected_Option = "";
+	let selected_Type = "";
 	
 	let products = [];
-	let selectedHeader = "stock";
+	
 	let ascendingOrder = true;
 	
 	
@@ -76,24 +76,7 @@
 		  });
 		 
 	}
-	const sortByNumberdate = () => {
-		  
-		  products = products.sort((obj1, obj2) => {
-			  return ascendingOrder ? Number(obj1['dateAdded']) - Number(obj2['dateAdded'])
-			  : Number(obj2['dateAdded']) - Number(obj1['dateAdded'])
-		
-		  });
-		 
-	}
-	const sortByNumberdatel = () => {
-		  
-		  products = products.sort((obj1, obj2) => {
-			  return !ascendingOrder ? Number(obj1['dateAdded']) - Number(obj2['dateAdded'])
-			  : Number(obj2['dateAdded']) - Number(obj1['dateAdded'])
-		
-		  });
-		 
-	}
+
 	const sortByStringA = () => {
 		  products = products.sort((obj1, obj2) => {
 			  if (obj1['dateAdded'] < obj2['dateAdded']) {
@@ -126,14 +109,14 @@
 	}
 
 
-	$: if (selectedOption==="Order by price lowest to highest") sortByNumber();
-	$: if (selectedOption==="Order by price highest to lowest") sortByNumberl();
+	$: if (selected_Option==="Order by price lowest to highest") sortByNumber();
+	$: if (selected_Option==="Order by price highest to lowest") sortByNumberl();
 
-	$: if (selectedOption==="Order by stock lowest to highest") sortByNumbers();
-	$: if (selectedOption==="Order by stock highest to lowest") sortByNumbersls();
+	$: if (selected_Option==="Order by stock lowest to highest") sortByNumbers();
+	$: if (selected_Option==="Order by stock highest to lowest") sortByNumbersls();
 	
-	$: if (selectedOption==="Order by recent added") sortByStringA();
-	$: if (selectedOption==="Order by old added") sortByString ();
+	$: if (selected_Option==="Order by recent added") sortByStringA();
+	$: if (selected_Option==="Order by old added") sortByString ();
 	
 
 	
@@ -142,17 +125,17 @@
 	let filteredProducts = [];
 	
 	// For Select Menu
-	$: if (selectedType) getProductsByTypes();
+	$: if (selected_Type) getProductsByTypes();
 
 	
 	const getProductsByTypes = () => {
 		// resets search input if menu is being used
 		
 		
-		if (selectedType === "all") {
+		if (selected_Type === "all") {
 			return filteredProducts = [];
 		} 
-		return filteredProducts = products.filter(product => product.type_product === selectedType);
+		return filteredProducts = products.filter(product => product.type_product === selected_Type);
 
 	}	
 
@@ -161,16 +144,12 @@
 	
 
 
-
-
-
-
 <section class="menu-cont">
 
 	<select class="menu" 
 					name="menu" 
 					id="menu" 
-					bind:value={selectedOption}>
+					bind:value={selected_Option}>
 		<option disabled selected value="">Select a type of filter</option>
 		<option value="none">None</option>
 		{#each tableHeading as option}
@@ -182,7 +161,7 @@
 		<select class="menu" 
 					name="menu" 
 					id="menu" 
-					bind:value={selectedType}>
+					bind:value={selected_Type}>
 		<option disabled selected value="">Select a type of product</option>
 		<option value="all">All types</option>
 		{#each types as type}
@@ -265,4 +244,5 @@
 	}
 	
 </style>
+
 

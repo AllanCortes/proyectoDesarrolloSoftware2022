@@ -1,22 +1,28 @@
-
 <script>
 	const tableHeading = ["Order by price highest to lowest","Order by price lowest to highest","Order by stock highest to lowest",
 	"Order by stock lowest to highest","Order by old added","Order by recent added"];
 	
+	
 	import { onMount } from 'svelte';
+	import {Table} from 'sveltestrap';
+	import { Styles, Button } from 'sveltestrap';
 	import { cart } from "../../store/store.js";
 	
+
     let types = []; 
-	let selectedOption = "";
-	let selectedType = "";
+	let selected_Option = "";
+	let selected_Type = "";
 	
 	let products = [];
+	
 	let ascendingOrder = true;
 	
 	
 	onMount(async () => {
 	  const res = await fetch("http://127.0.0.1:8000/products/");
 	  products = await res.json();
+
+		
 		for (let proObj of products) {
 			if (!types.includes(proObj.type_product)) {
 				types = [...types, proObj.type_product]
@@ -24,9 +30,14 @@
 		}
 		types = types.sort();
 		console.log(types);
+	 
+
+	  
     })
 	
+
 	const sortByNumber = () => {
+		  
 		  products = products.sort((obj1, obj2) => {
 			  return ascendingOrder ? Number(obj1['price']) - Number(obj2['price'])
 			  : Number(obj2['price']) - Number(obj1['price'])
@@ -61,6 +72,7 @@
 		  });
 		 
 	}
+
 	const sortByStringA = () => {
 		  products = products.sort((obj1, obj2) => {
 			  if (obj1['dateAdded'] < obj2['dateAdded']) {
@@ -88,45 +100,60 @@
 		 
 	}
 
-	$: if (selectedOption==="Order by price lowest to highest") sortByNumber();
-	$: if (selectedOption==="Order by price highest to lowest") sortByNumberl();
 
-	$: if (selectedOption==="Order by stock lowest to highest") sortByNumbers();
-	$: if (selectedOption==="Order by stock highest to lowest") sortByNumbersls();
+
+	$: if (selected_Option==="Order by price lowest to highest") sortByNumber();
+	$: if (selected_Option==="Order by price highest to lowest") sortByNumberl();
+
+	$: if (selected_Option==="Order by stock lowest to highest") sortByNumbers();
+	$: if (selected_Option==="Order by stock highest to lowest") sortByNumbersls();
 	
-	$: if (selectedOption==="Order by recent added") sortByStringA();
-	$: if (selectedOption==="Order by old added") sortByString ();
+	$: if (selected_Option==="Order by recent added") sortByStringA();
+	$: if (selected_Option==="Order by old added") sortByString ();
+	
+
+	
 	
 	// Query results
-	let filteredProducts = [];
+	let filtered_Products = [];
 	
 	// For Select Menu
-	$: if (selectedType) getProductsByTypes();
+	$: if (selected_Type) getProductsByTypes();
 
+	
 	const getProductsByTypes = () => {
 		// resets search input if menu is being used
-		if (selectedType === "all") {
-			return filteredProducts = [];
+		
+		
+		if (selected_Type === "all") {
+			return filtered_Products = [];
 		} 
-		return filteredProducts = products.filter(product => product.type_product === selectedType);
+		return filtered_Products = products.filter(product => product.type_product === selected_Type);
+
 	}	
 
+	
 	//cart
 	const addToCart = (product) => {
 		if (product.stock > 0){
 			for(let item of $cart) {
 					if(item.id === product.id) {
 						if (product.stock>product.quantity){
+
+						
 						product.quantity += 1
 						$cart = $cart;
 						console.log($cart)
 						return;
 						}
+						
 					}
 			}
+		
 			$cart = [...$cart, product]
 			console.log($cart)
 		}
+	
 	}
 	const minusItem = (product) => {
 		for(let item of $cart) {
@@ -157,13 +184,29 @@
 			}
 		}
 	}
+
+	
+	
+	
+	
+	
 	$: total = $cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+	
+
+	
+	
+
+
+	
+		
+	
 </script>
 
 
 
 <div class="cart-list">
 	<h4>Shoping cart</h4>
+	
 	{#each $cart as item }
 		{#if item.quantity > 0}
 		<div class="cart-item">
@@ -171,13 +214,17 @@
 			<div>{item.quantity}
 				<button on:click={() => plusItem(item)}>+</button>
 				<button on:click={() => minusItem(item)}>-</button>
+				
 			</div>
 			<p>${item.price * item.quantity}</p>
 		</div>
 		{/if}
 	{/each}
+	
 	<div class="total">
+		
 		<h4>Total:${total}</h4>
+		
 	</div>
 </div>
 
@@ -191,7 +238,7 @@
 	<select class="menu" 
 					name="menu" 
 					id="menu" 
-					bind:value={selectedOption}>
+					bind:value={selected_Option}>
 		<option disabled selected value="">Select a type of filter</option>
 		<option value="none">None</option>
 		{#each tableHeading as option}
@@ -203,7 +250,7 @@
 		<select class="menu" 
 					name="menu" 
 					id="menu" 
-					bind:value={selectedType}>
+					bind:value={selected_Type}>
 		<option disabled selected value="">Select a type of product</option>
 		<option value="all">All types</option>
 		{#each types as type}
@@ -226,9 +273,9 @@
 <main id="bookshelf">
 	
 	
-	{#if filteredProducts.length > 0}
+	{#if filtered_Products.length > 0}
 	<div class="product-list">
-	{#each filteredProducts as product}
+	{#each filtered_Products as product}
 	<div>
 		<div class="image" style="background-image: url({product.image})"></div>
 	<h4>{product.product_name}</h4>
