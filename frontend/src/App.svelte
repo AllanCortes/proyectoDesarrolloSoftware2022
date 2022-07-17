@@ -7,6 +7,7 @@
 	import Catalogo from "./components/Catalogo.svelte";
 	import AddProduct from "./components/admin/addProduct.svelte";
 	import EditProduct from "./components/admin/editProduct.svelte";
+	import Products from "./components/admin/ListProduct.svelte";
     import Cart from "./components/client/cart.svelte";
 	import Buy from "./components/client/buy.svelte"
 	import Products from "./components/admin/ListProduct.svelte";
@@ -61,7 +62,7 @@
 							   <div align="center">
 							   <img src="https://i.ibb.co/5kQbrtc/Pet-Lovers.png" alt="" />
 							   		  <h1> {title} </h1>
-							   <h1> La plataforma online de la mejor tienda de mascotas </h1>
+							   <h1> We love animals </h1>
 							   </div>
 		 				</div>
 						 <div aling="center">
