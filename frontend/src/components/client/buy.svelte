@@ -1,4 +1,3 @@
-
 <script>
 	const tableHeading = ["Order by price highest to lowest","Order by price lowest to highest","Order by stock highest to lowest",
 	"Order by stock lowest to highest","Order by old added","Order by recent added"];
@@ -7,12 +6,9 @@
 	import { onMount } from 'svelte';
 	import {Table} from 'sveltestrap';
 	import { Styles, Button } from 'sveltestrap';
-	import {navigate } from "svelte-navigator";
+	import { cart } from "../../store/store.js";
 	
-	
-	
-	
-	
+
     let types = []; 
 	let selected_Option = "";
 	let selected_Type = "";
@@ -104,9 +100,6 @@
 		 
 	}
 
-	function buyNoLogged(){
-    	navigate("/login");
-	}
 
 
 	$: if (selected_Option==="Order by price lowest to highest") sortByNumber();
@@ -122,7 +115,7 @@
 	
 	
 	// Query results
-	let filteredProducts = [];
+	let filtered_Products = [];
 	
 	// For Select Menu
 	$: if (selected_Type) getProductsByTypes();
@@ -133,15 +126,111 @@
 		
 		
 		if (selected_Type === "all") {
-			return filteredProducts = [];
+			return filtered_Products = [];
 		} 
-		return filteredProducts = products.filter(product => product.type_product === selected_Type);
+		return filtered_Products = products.filter(product => product.type_product === selected_Type);
 
 	}	
 
-</script>
+	
+	//cart
+	const addToCart = (product) => {
+		if (product.stock > 0){
+			for(let item of $cart) {
+					if(item.id === product.id) {
+						if (product.stock>product.quantity){
+
+						
+						product.quantity += 1
+						$cart = $cart;
+						console.log($cart)
+						return;
+						}
+						
+					}
+			}
+		
+			$cart = [...$cart, product]
+			console.log($cart)
+		}
+	
+	}
+	const minusItem = (product) => {
+		for(let item of $cart) {
+				if(item.id === product.id) {
+					
+						if(product.quantity > 1 ) {
+								product.quantity -= 1
+								$cart = $cart
+								console.log($cart)
+						} else {
+								$cart = $cart.filter((cartItem) => cartItem != product)
+								console.log($cart)
+						}
+						return;
+				}
+		}
+	}
+	
+	const plusItem = (product) => {
+		for(let item of $cart) {
+			if(item.id === product.id) {
+				if (product.stock>product.quantity){
+				item.quantity += 1
+				$cart = $cart;
+				console.log($cart)
+				return;
+				}
+			}
+		}
+	}
 
 	
+	
+	
+	
+	
+	$: total = $cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+	
+
+	
+	
+
+
+	
+		
+	
+</script>
+
+
+
+<div class="cart-list">
+	<h4>Shoping cart</h4>
+	
+	{#each $cart as item }
+		{#if item.quantity > 0}
+		<div class="cart-item">
+			<img width="50" src={item.image} alt={item.product_name}/>
+			<div>{item.quantity}
+				<button on:click={() => plusItem(item)}>+</button>
+				<button on:click={() => minusItem(item)}>-</button>
+				
+			</div>
+			<p>${item.price * item.quantity}</p>
+		</div>
+		{/if}
+	{/each}
+	
+	<div class="total">
+		
+		<h4>Total:${total}</h4>
+		
+	</div>
+</div>
+
+
+
+
 
 
 <section class="menu-cont">
@@ -184,9 +273,9 @@
 <main id="bookshelf">
 	
 	
-	{#if filteredProducts.length > 0}
+	{#if filtered_Products.length > 0}
 	<div class="product-list">
-	{#each filteredProducts as product}
+	{#each filtered_Products as product}
 	<div>
 		<div class="image" style="background-image: url({product.image})"></div>
 	<h4>{product.product_name}</h4>
@@ -197,7 +286,7 @@
 	{:else}
 	<p>Stock no disponible </p>
 	{/if}
-	<td><Button on:click={buyNoLogged} color="primary"> Add to cart </Button></td>
+	<button on:click={() => addToCart(product)}>Add to cart</button>
 	</div>
 	
 	{/each}
@@ -216,7 +305,7 @@
 	{:else}
 	<p>Stock no disponible </p>
 	{/if}
-	<td><Button on:click={buyNoLogged} color="primary"> Add to cart </Button></td>
+	<button on:click={() => addToCart(product)}>Add to cart</button>
 	</div>
 	
 	{/each}
@@ -230,17 +319,29 @@
 
 
 <style>
-	.product-list {
+	
+	  .product-list, .cart-item {
 		display: grid;
 		grid-template-columns: repeat(3, 1fr);
-	}
+	  }
 	
-	.image {
+	  .image {
 		height: 150px;
 		width: 150px;
 		background-size: contain;
 		background-position: center;
 		background-repeat: no-repeat;
-	}
+	  }
+
+		.total {
+		text-align: right;
+	  }
 	
+	  .cart-list {
+		border: 2px solid;
+		padding: 10px;
+	  }
+
+    
+    
 </style>
